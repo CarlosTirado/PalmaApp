@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { smoothlyMenu } from '../../../app.helpers';
 import { Router, ActivatedRoute } from '@angular/router';
-declare var jQuery:any;
+import { AuthorizeService } from '../../../../api-authorization/authorize.service';
+declare var jQuery: any;
 
 @Component({
   selector: 'topnavbar',
@@ -9,17 +10,29 @@ declare var jQuery:any;
 })
 export class TopNavbarComponent {
 
-    constructor(
-        private router: Router,
-        private activeRoute: ActivatedRoute) { }
+  estaAutenticado: boolean;
+
+  constructor(
+    private router: Router,
+    private activeRoute: ActivatedRoute,
+    private authorizeService: AuthorizeService
+  ) {
+    this.verificarSesion();
+  }
 
   toggleNavigation(): void {
     jQuery("body").toggleClass("mini-navbar");
     smoothlyMenu();
-    }
+  }
 
-    goToLogout(): void {
-        this.router.navigate(['/authentication/logout'], { state: { local: true } });
-    }
+  goToLogout(): void {
+    this.router.navigate(['/authentication/logout'], { state: { local: true } });
+  }
+
+  verificarSesion(): void {
+    this.authorizeService.isAuthenticated().subscribe(response => {
+      this.estaAutenticado = response;
+    });
+  }
 
 }

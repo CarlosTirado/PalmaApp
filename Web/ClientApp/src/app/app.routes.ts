@@ -16,33 +16,33 @@ import { TopNavigationLayoutComponent } from "./components/common/layouts/topNav
 import { AuthorizeGuard } from "../api-authorization/authorize.guard";
 
 export const ROUTES: Routes = [
-    // Main redirect
-    { path: '', redirectTo: 'starterview', pathMatch: 'full' },
+  // Main redirect
+  { path: '', redirectTo: 'starterview', pathMatch: 'full' },
 
-    // App views
-    {
-        path: 'dashboards', component: BasicLayoutComponent,
-        children: [
-            { path: 'dashboard1', component: Dashboard1Component },
-            { path: 'dashboard2', component: Dashboard2Component },
-            { path: 'dashboard3', component: Dashboard3Component, canActivate: [AuthorizeGuard] },
-            { path: 'dashboard4', component: Dashboard4Component },
-            { path: 'dashboard5', component: Dashboard5Component }
-        ]
-    },
-    {
-        path: '', component: BasicLayoutComponent,
-        children: [
-            { path: 'starterview', component: StarterViewComponent }
-        ]
-    },
-    {
-        path: '', component: BlankLayoutComponent,
-        children: [
-            { path: 'login', component: LoginComponent },
-        ]
-    },
+  // App views
+  {
+    path: 'dashboards', component: BasicLayoutComponent,
+    children: [
+      { path: 'dashboard1', component: Dashboard1Component, canActivate: [AuthorizeGuard] },
+      { path: 'dashboard2', component: Dashboard2Component, canActivate: [AuthorizeGuard] },
+      { path: 'dashboard3', component: Dashboard3Component, canActivate: [AuthorizeGuard] },
+      { path: 'dashboard4', component: Dashboard4Component, canActivate: [AuthorizeGuard] },
+      { path: 'dashboard5', component: Dashboard5Component, canActivate: [AuthorizeGuard] }
+    ]
+  },
+  {
+    path: '', component: BasicLayoutComponent,
+    children: [
+      { path: 'starterview', component: StarterViewComponent }
+    ]
+  },
+  {
+    path: '', component: BlankLayoutComponent,
+    children: [
+      { path: 'login', component: LoginComponent },
+    ]
+  },
 
-    // Handle all other routes
-    { path: '**', redirectTo: 'starterview' }
+  // Handle all other routes
+  { path: '**', redirectTo: 'starterview' }
 ];

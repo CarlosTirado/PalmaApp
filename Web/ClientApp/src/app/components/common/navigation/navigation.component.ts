@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
 import 'jquery-slimscroll';
+import { AuthorizeService } from '../../../../api-authorization/authorize.service';
 
 declare var jQuery:any;
 
@@ -11,7 +12,14 @@ declare var jQuery:any;
 
 export class NavigationComponent {
 
-  constructor(private router: Router) {}
+  estaAutenticado: boolean;
+
+  constructor(
+    private router: Router,
+    private authorizeService: AuthorizeService
+  ) {
+    this.verificarSesion();
+  }
 
   ngAfterViewInit() {
     jQuery('#side-menu').metisMenu();
@@ -27,5 +35,14 @@ export class NavigationComponent {
     return this.router.url.indexOf(routename) > -1;
   }
 
+  verificarSesion(): void {
+    this.authorizeService.isAuthenticated().subscribe(response => {
+      this.estaAutenticado = response;
+    });
+
+    this.authorizeService.getUser().subscribe(response => {
+      alert(JSON.stringify(response));
+    });
+  }
 
 }
