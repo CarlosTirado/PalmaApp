@@ -40,9 +40,6 @@ export class NavigationComponent {
       this.estaAutenticado = response;
     });
 
-    this.authorizeService.getUser().subscribe(response => {
-      alert(JSON.stringify(response));
-    });
   }
 
 }
