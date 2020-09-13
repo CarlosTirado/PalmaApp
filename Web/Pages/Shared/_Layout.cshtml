@@ -4,9 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TestCore5</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - PalmApp</title>
+    <link rel="icon" href="/favicon.png" type="image/png">
 
     <environment include="Development">
         <link rel="stylesheet" href="~/Identity/lib/bootstrap/dist/css/bootstrap.css" />
@@ -16,47 +17,77 @@
               asp-fallback-href="~/Identity/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
     </environment>
-    <link rel="stylesheet" href="~/Identity/css/site.css" />
+    @*<link rel="stylesheet" href="~/Identity/css/site.css" />*@
+    <link rel="stylesheet" href="/css/app.css" />
+    <link rel="stylesheet" href="/css/material-icons.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-light navbar-toggleable-sm bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" href="~/">TestCore5</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    @{
-                        var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
-                    }
-                    @if (result.Success)
-                    {
-                        await Html.RenderPartialAsync("_LoginPartial");
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("The default Identity UI layout requires a partial view '_LoginPartial' " +
-                            "usually located at '/Pages/_LoginPartial' or at '/Views/Shared/_LoginPartial' to work. Based on your configuration " +
-                            $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
-                    }
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <div class="container">
-        <partial name="_CookieConsentPartial" optional />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="content-logo">
+        <a href="#!">
+            <img src="/img/palmApp_logo.png">
+        </a>
     </div>
-    <footer class="footer border-top text-muted">
-        <div class="container">
-            &copy; 2020 - TestCore5 - <a asp-area="" asp-page="Privacy">Privacy</a>
+
+    <div class="container-background">
+        <div class="text-info">
+            <h2 style="color: white;" class="mb-16">¡Bienvenido a PalmApp!</h2>
+            <p style="color: white">
+                Aplicativo web para la gestión de procesos en cultivos de palma de aceite africana
+            </p>
         </div>
-    </footer>
+    </div>
+    <div class="container-login">
+        <div class="form">
+            <div class="logo-login">
+                <img src="/img/palmApp_logo.png">
+            </div>
+            @RenderBody()
+        </div>
+        <partial name="_CookieConsentPartial" optional />
+        
+        <div class="footer-mark">
+            <p class="text-center">Hecho con <span class="red-text">❤</span> PSPA © 2020</p>
+        </div>
+    </div>
+
+    @*<header>
+            <nav class="navbar navbar-expand-sm navbar-light navbar-toggleable-sm bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" href="~/">TestCore5</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        @{
+                            var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
+                        }
+                        @if (result.Success)
+                        {
+                            await Html.RenderPartialAsync("_LoginPartial");
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException("The default Identity UI layout requires a partial view '_LoginPartial' " +
+                                "usually located at '/Pages/_LoginPartial' or at '/Views/Shared/_LoginPartial' to work. Based on your configuration " +
+                                $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
+                        }
+                    </div>
+                </div>
+            </nav>
+        </header>*@
+
+    @*<div class="container">
+            <partial name="_CookieConsentPartial" optional />
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>*@
+    @*<footer class="footer border-top text-muted">
+            <div class="container">
+                &copy; 2020 - TestCore5 - <a asp-area="" asp-page="Privacy">Privacy</a>
+            </div>
+        </footer>*@
 
     <environment include="Development">
         <script src="~/Identity/lib/jquery/dist/jquery.js"></script>
