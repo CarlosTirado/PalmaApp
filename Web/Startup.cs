@@ -11,6 +11,12 @@ using TestCore5.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Reflection;
+using Data.Context;
+using MediatR;
+using Data.Base;
+using Domain.Base;
+using System;
 
 namespace TestCore5
 {
@@ -28,13 +34,15 @@ namespace TestCore5
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("PalmAppContext")));
 
-            services.AddDefaultIdentity<ApplicationUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+            services.AddIdentityServer().AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+
+            InyeccionPalmAppContext(services);
+            InyeccionesGenericas(services);
+            InyeccionesEspecificas(services);
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
@@ -48,6 +56,35 @@ namespace TestCore5
 
 
         }
+
+        private void InyeccionPalmAppContext(IServiceCollection services)
+        {
+            var palmApp = Configuration.GetConnectionString("PalmAppContext");
+            services.AddDbContext<PalmAppContext>(opt => opt.UseSqlServer(palmApp));
+        }
+
+        private void InyeccionesGenericas(IServiceCollection services)
+        {
+            services.Scan(scan =>
+                    scan.FromAssemblies(Assembly.Load($"Domain"))
+                    .AddClasses(classes => classes.Where(type => type.Name.EndsWith("Service")))
+                        .AsImplementedInterfaces()
+                            .WithTransientLifetime());
+
+            services.Scan(scan =>
+                    scan.FromAssemblies(Assembly.Load($"Aplication"))
+                    .AddClasses(classes => classes.Where(type => type.Name.EndsWith("Service")))
+                        .AsImplementedInterfaces()
+                            .WithTransientLifetime());
+        }
+
+        private void InyeccionesEspecificas(IServiceCollection services)
+        {
+            services.AddMediatR(AppDomain.CurrentDomain.Load("Aplication"));
+
+            services.AddScoped<IPalmAppUnitOfWork, PalmAppUnitOfWork>();
+        }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -72,7 +109,6 @@ namespace TestCore5
             }
 
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
