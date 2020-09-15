@@ -3,9 +3,9 @@
     <ul class="nav metismenu" id="side-menu">
       <li class="nav-header" *ngIf="estaAutenticado">
         <div class="profile-element" dropdown>
-          <img alt="image" class="img-circle" src="assets/images/profile_small.jpg">
-          <a dropdownToggle>
-            <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong> </span>
+          <img alt="image" class="img-circle" src="assets/images/user_default_2.png">
+          <a dropdownToggle *ngIf="tercero != null">
+            <span class="block m-t-xs"> <strong class="font-bold">{{tercero.nombres}} {{tercero.apellidos}}</strong> </span>
             <span class="text-muted text-xs block">Art Director <b class="caret"></b> </span>
           </a>
           <ul class="animated fadeInRight dropdown-menu" *dropdownMenu>
