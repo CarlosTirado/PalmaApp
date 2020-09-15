@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.Sql/servers/palmapp-ct/databases/PalmApp",
+      "type": "mssql.azure",
+      "connectionId": "PalmAppContext",
+      "secretStore": null
+    }
+  }
+}
