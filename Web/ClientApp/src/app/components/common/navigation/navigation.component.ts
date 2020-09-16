@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import 'jquery-slimscroll';
 import { AuthorizeService } from '../../../../api-authorization/authorize.service';
 import { TerceroService } from '../../../services/common/tercero.service';
+import { AccountService } from '../../../services/common/account.service';
 
 declare var jQuery:any;
 
@@ -16,11 +17,14 @@ export class NavigationComponent {
   estaAutenticado: boolean;
   user: any;
   tercero: any;
+  roles: any;
+  nombreRolGeneral: string;
 
   constructor(
     private router: Router,
     private authorizeService: AuthorizeService,
-    private terceroService: TerceroService
+    private terceroService: TerceroService,
+    private accountService: AccountService
   ) {
     console.log("Constructor");
     this.verificarSesion();
@@ -52,6 +56,7 @@ export class NavigationComponent {
       this.user = response;
       if (this.user.name !== null) {
         this.buscarTerceroPorCorreo(this.user.name);
+        this.buscarRolesUsuarios(this.user.name);
       }
     });
   }
@@ -59,6 +64,16 @@ export class NavigationComponent {
   buscarTerceroPorCorreo(correo: string) {
     this.terceroService.getTerceroPorCorreo(correo).subscribe(response => {
       this.tercero = response;
+    });
+  }
+  buscarRolesUsuarios(username: string) {
+    this.accountService.getUserRoles(username).subscribe(response => {
+      this.roles = response;
+
+      if (this.roles.filter(t => t.name === "Dueño").length > 0) this.nombreRolGeneral = "Dueño"; 
+      if (this.roles.filter(t => t.name === "Administrador").length > 0) this.nombreRolGeneral = "Administrador"; 
+      if (this.roles.filter(t => t.name === "Propietario").length > 0) this.nombreRolGeneral = "Propietario";
+
     });
   }
 
