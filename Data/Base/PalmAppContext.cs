@@ -1,4 +1,5 @@
-﻿using Data.DatosBasicos.Mappers;
+﻿using Data.Cultivos.Mappers;
+using Data.DatosBasicos.Mappers;
 using Domain.Cultivos;
 using Domain.DatosBasicos;
 using MediatR;
@@ -22,6 +23,7 @@ namespace Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new TerceroEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new CultivoEntityTypeConfiguration());
         }
     }
 }
