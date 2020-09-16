@@ -72,7 +72,7 @@ export class NavigationComponent {
 
       if (this.roles.filter(t => t.name === "Dueño").length > 0) this.nombreRolGeneral = "Dueño"; 
       if (this.roles.filter(t => t.name === "Administrador").length > 0) this.nombreRolGeneral = "Administrador"; 
-      if (this.roles.filter(t => t.name === "Propietario").length > 0) this.nombreRolGeneral = "Propietario";
+      if (this.roles.filter(t => t.name === "Operario").length > 0) this.nombreRolGeneral = "Operario";
 
     });
   }
