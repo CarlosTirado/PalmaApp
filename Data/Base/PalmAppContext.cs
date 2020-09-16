@@ -1,4 +1,5 @@
 ﻿using Data.DatosBasicos.Mappers;
+using Domain.Cultivos;
 using Domain.DatosBasicos;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,7 @@ namespace Data.Context
               : base(options) { }
 
         public DbSet<Tercero> Terceros { get; set; }
+        public DbSet<Cultivo> Cultivos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

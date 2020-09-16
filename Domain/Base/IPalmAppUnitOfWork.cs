@@ -1,4 +1,5 @@
-﻿using Domain.DatosBasicos;
+﻿using Domain.Cultivos;
+using Domain.DatosBasicos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,5 +11,6 @@ namespace Domain.Base
         DateTime DateNow { get; }
         int Commit();
         ITerceroRepository TerceroRepository { get; }
+        ICultivoRepository CultivoRepository { get; }
     }
 }
