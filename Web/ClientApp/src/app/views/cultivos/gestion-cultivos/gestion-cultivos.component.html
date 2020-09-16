@@ -1,1 +1,38 @@
-<p>gestion-cultivos works!</p>
+<div class="panel">
+    <div class="panel-heading h5 text-right">
+        <span class="pull-left"><i class="fa fa-tree m-r-xs"></i> Cultivos</span>
+        <button class="btn btn-primary" (click)='AbrirModalNuevoCultivo()'>Nuevo Cultivo <i class="fa fa-plus m-l-xs"></i></button>
+    </div>
+    <div class="panel-boddy">
+        <div class="table-responsive p-w-sm">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Nombre</th>
+                        <th class="text-center">Fecha Siembra</th>
+                        <th class="text-center">Estado</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let cultivo of cultivos; index as i'>
+                        <td class="text-center">{{i+1}}</td>
+                        <td>{{cultivo.nombre}}</td>
+                        <td class="text-center">{{cultivo.fechaSiembra | date:'dd-MM-yyyy'}}</td>
+                        <td class="text-center"> <span class="label" [ngClass]='{"label-primary": cultivo.estado == "AC", "label-danger": cultivo.estado != "AC"}'>{{cultivo.estado == 'AC' ? 'ACTIVO': 'INACTIVO'}}</span></td>
+                        <td style="width: 125px;">
+                            <button class="btn btn-default btn-xs">Editar</button>
+                            <button class="btn btn-default btn-xs">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="text-center" *ngIf='cultivos.length <= 0'><i>No se encontraron cultivos registrados en el sistema</i></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

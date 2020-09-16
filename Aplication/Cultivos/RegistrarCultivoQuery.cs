@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Aplication.Cultivos
 {
-    public class RegistrarCultivoQuery : IRequestHandler<RegistrarCultivoQueryRequest, RegistrarCultivoQueryResponse>
+    public class RegistrarCultivoQuery : IRequestHandler<RegistrarCultivoRequest, RegistrarCultivoResponse>
     {
         private readonly IPalmAppUnitOfWork _palmAppUnitOfWork;
         public RegistrarCultivoQuery(
@@ -19,16 +19,18 @@ namespace Aplication.Cultivos
             _palmAppUnitOfWork = palmAppUnitOfWork;
         }
 
-        public Task<RegistrarCultivoQueryResponse> Handle(RegistrarCultivoQueryRequest request, CancellationToken cancellationToken)
+        public Task<RegistrarCultivoResponse> Handle(RegistrarCultivoRequest request, CancellationToken cancellationToken)
         {
             var cultivo = new Cultivo(request.Nombre, request.FechaSiembra);
             _palmAppUnitOfWork.CultivoRepository.Add(cultivo);
-            return Task.FromResult(new RegistrarCultivoQueryResponse(cultivo.Id));
+            _palmAppUnitOfWork.Commit();
+            return Task.FromResult(new RegistrarCultivoResponse(cultivo.Id));
         }
     }
-    public class RegistrarCultivoQueryRequest : IRequest<RegistrarCultivoQueryResponse>
+    public class RegistrarCultivoRequest : IRequest<RegistrarCultivoResponse>
     {
-        public RegistrarCultivoQueryRequest(string nombre, DateTime fechaSiembra)
+        public RegistrarCultivoRequest() { }
+        public RegistrarCultivoRequest(string nombre, DateTime fechaSiembra)
         {
             Nombre = nombre;
             FechaSiembra = fechaSiembra;
@@ -37,9 +39,9 @@ namespace Aplication.Cultivos
         public string Nombre { get; set; }
         public DateTime FechaSiembra { get; set; }
     }
-    public class RegistrarCultivoQueryResponse
+    public class RegistrarCultivoResponse
     {
-        public RegistrarCultivoQueryResponse(long cultivoRegistradoId)
+        public RegistrarCultivoResponse(long cultivoRegistradoId)
         {
             CultivoRegistradoId = cultivoRegistradoId;
             Mensaje = "Operación realizada correctamente";

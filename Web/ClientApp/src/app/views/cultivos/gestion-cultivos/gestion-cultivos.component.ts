@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Cultivo } from '../Models/cultivo';
+import { CultivoService } from '../Services/Cultivo.service';
 
 @Component({
   selector: 'app-gestion-cultivos',
@@ -7,9 +9,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GestionCultivosComponent implements OnInit {
 
-  constructor() { }
+	public cultivos:Cultivo[];
 
-  ngOnInit() {
-  }
+	constructor(
+		private _cultivoService: CultivoService
+	) { }
+
+	ngOnInit() {
+		this.cultivos = new Array<Cultivo>();
+		this.ConsultarCultivos();
+	}
+
+	private ConsultarCultivos(){
+		this._cultivoService.ConsultarCultivos()
+		.subscribe(response =>{
+			if(!response) return;
+			this.cultivos = response;
+		})
+	}
+
+	public AbrirModalNuevoCultivo(){
+		this.RegistrarCultivo();
+	}
+
+	private RegistrarCultivo(){
+		this._cultivoService.RegistrarCultivo({nombre:"Mi Primer Cultivo", fechaSiembra: new Date()})
+		.subscribe(response =>{
+			if(!response) return;
+			this.ConsultarCultivos();
+		})
+	}
+
 
 }

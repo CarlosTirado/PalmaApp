@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Aplication.Cultivos
 {
-    public class ConsultarCultivosQuery : IRequestHandler<ConsultarCultivosQueryRequest, ConsultarCultivosQueryResponse>
+    public class ConsultarCultivosQuery : IRequestHandler<ConsultarCultivosRequest, ConsultarCultivosResponse>
     {
         private readonly IPalmAppUnitOfWork _palmAppUnitOfWork;
         public ConsultarCultivosQuery(
@@ -19,7 +19,7 @@ namespace Aplication.Cultivos
             _palmAppUnitOfWork = palmAppUnitOfWork;
         }
 
-        public Task<ConsultarCultivosQueryResponse> Handle(ConsultarCultivosQueryRequest request, CancellationToken cancellationToken)
+        public Task<ConsultarCultivosResponse> Handle(ConsultarCultivosRequest request, CancellationToken cancellationToken)
         {
             var cultivos = _palmAppUnitOfWork.CultivoRepository.Gets();
             var cultivosView = cultivos.Select(t => new CultivoModelView()
@@ -30,15 +30,15 @@ namespace Aplication.Cultivos
                 Nombre = t.Nombre
             }).ToList();
 
-            return Task.FromResult(new ConsultarCultivosQueryResponse(cultivosView));
+            return Task.FromResult(new ConsultarCultivosResponse(cultivosView));
         }
     }
-    public class ConsultarCultivosQueryRequest : IRequest<ConsultarCultivosQueryResponse>
+    public class ConsultarCultivosRequest : IRequest<ConsultarCultivosResponse>
     {
     }
-    public class ConsultarCultivosQueryResponse
+    public class ConsultarCultivosResponse
     {
-        public ConsultarCultivosQueryResponse(List<CultivoModelView> cultivos)
+        public ConsultarCultivosResponse(List<CultivoModelView> cultivos)
         {
             Cultivos = cultivos;
         }

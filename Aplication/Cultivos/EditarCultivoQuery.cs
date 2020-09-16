@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Aplication.Cultivos
 {
-    public class EditarCultivoQuery : IRequestHandler<EditarCultivoQueryRequest, EditarCultivoQueryResponse>
+    public class EditarCultivoQuery : IRequestHandler<EditarCultivoRequest, EditarCultivoResponse>
     {
         private readonly IPalmAppUnitOfWork _palmAppUnitOfWork;
         public EditarCultivoQuery(
@@ -19,18 +19,18 @@ namespace Aplication.Cultivos
             _palmAppUnitOfWork = palmAppUnitOfWork;
         }
 
-        public Task<EditarCultivoQueryResponse> Handle(EditarCultivoQueryRequest request, CancellationToken cancellationToken)
+        public Task<EditarCultivoResponse> Handle(EditarCultivoRequest request, CancellationToken cancellationToken)
         {
             var cultivo = _palmAppUnitOfWork.CultivoRepository.Get(request.CultivoId);
 
             cultivo.Editar(request.Nombre, request.FechaSiembra, request.Estado);
 
-            return Task.FromResult(new EditarCultivoQueryResponse(cultivo.Id));
+            return Task.FromResult(new EditarCultivoResponse(cultivo.Id));
         }
     }
-    public class EditarCultivoQueryRequest : IRequest<EditarCultivoQueryResponse>
+    public class EditarCultivoRequest : IRequest<EditarCultivoResponse>
     {
-        public EditarCultivoQueryRequest(long cultivoId, string nombre, DateTime fechaSiembra)
+        public EditarCultivoRequest(long cultivoId, string nombre, DateTime fechaSiembra)
         {
             Nombre = nombre;
             FechaSiembra = fechaSiembra;
@@ -41,9 +41,9 @@ namespace Aplication.Cultivos
         public DateTime FechaSiembra { get; private set; }
         public string Estado { get; private set; }
     }
-    public class EditarCultivoQueryResponse
+    public class EditarCultivoResponse
     {
-        public EditarCultivoQueryResponse(long cultivoEditadoId)
+        public EditarCultivoResponse(long cultivoEditadoId)
         {
             CultivoEditadoId = cultivoEditadoId;
             Mensaje = "Operación realizada correctamente";
