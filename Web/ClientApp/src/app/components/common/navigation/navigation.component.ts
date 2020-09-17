@@ -54,6 +54,7 @@ export class NavigationComponent {
   buscarUsuario(): void {
     this.authorizeService.getUser().subscribe(response => {
       this.user = response;
+      if(!this.user) return;
       if (this.user.name !== null) {
         this.buscarTerceroPorCorreo(this.user.name);
         this.buscarRolesUsuarios(this.user.name);

@@ -34,7 +34,6 @@
         <a><i class="fa fa-archive"></i> <span class="nav-label">Cultivos</span> <span class="fa arrow"></span> </a>
         <ul class="nav nav-second-level collapse" [ngClass]="{in: activeRoute('cultivos')}">
           <li [ngClass]="{active: activeRoute('gestion-cultivos')}"><a [routerLink]="['/cultivos/gestion']">Gestión</a></li>
-          <li [ngClass]="{active: activeRoute('registro-cultivos')}"><a [routerLink]="['/cultivos/registro']">Registro</a></li>
         </ul>
       </li>
       <li *ngIf="!estaAutenticado" [ngClass]="{active: activeRoute('login')}">

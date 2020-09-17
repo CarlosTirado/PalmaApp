@@ -43,11 +43,10 @@ namespace Web.Controllers
         }
 
         [HttpPut("")]
-        public async Task<ActionResult<EditarCultivoResponse>> Post(EditarCultivoRequest request)
+        public async Task<ActionResult<EditarCultivoResponse>> Put(EditarCultivoRequest request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);
         }
-
     }
 }

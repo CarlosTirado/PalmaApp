@@ -24,22 +24,16 @@ namespace Aplication.Cultivos
             var cultivo = _palmAppUnitOfWork.CultivoRepository.Get(request.CultivoId);
 
             cultivo.Editar(request.Nombre, request.FechaSiembra, request.Estado);
-
+            _palmAppUnitOfWork.Commit();
             return Task.FromResult(new EditarCultivoResponse(cultivo.Id));
         }
     }
     public class EditarCultivoRequest : IRequest<EditarCultivoResponse>
     {
-        public EditarCultivoRequest(long cultivoId, string nombre, DateTime fechaSiembra)
-        {
-            Nombre = nombre;
-            FechaSiembra = fechaSiembra;
-            CultivoId = cultivoId;
-        }
-        public long CultivoId { get; private set; }
-        public string Nombre { get; private set; }
-        public DateTime FechaSiembra { get; private set; }
-        public string Estado { get; private set; }
+        public long CultivoId { get; set; }
+        public string Nombre { get; set; }
+        public DateTime FechaSiembra { get; set; }
+        public string Estado { get; set; }
     }
     public class EditarCultivoResponse
     {

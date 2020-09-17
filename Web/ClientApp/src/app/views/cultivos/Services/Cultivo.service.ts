@@ -22,8 +22,12 @@ export class CultivoService {
 		return this._http.post<CultivoResponse>(`api/Cultivo`, cultivo);
 	}
 
-	public EditarCultivo(cultivoId:number, cultivo:Cultivo): Observable<CultivoResponse> {
-		return this._http.put<CultivoResponse>(`api/Cultivo`, {cultivoId, cultivo});
+	public EditarCultivo(cultivoId:number, nombre:string, fechaSiembra:Date, estado:string): Observable<CultivoResponse> {
+		return this._http.put<CultivoResponse>(`api/Cultivo`, {cultivoId, nombre, fechaSiembra, estado});
+	}
+
+	public InactivarCultivo(cultivoId:number, nombre:string, fechaSiembra:Date): Observable<CultivoResponse> {
+		return this._http.put<CultivoResponse>(`api/Cultivo`, {cultivoId, nombre, fechaSiembra, estado: 'IN'});
 	}
   
 }
