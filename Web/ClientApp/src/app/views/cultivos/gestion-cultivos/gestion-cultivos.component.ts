@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cultivo } from '../Models/cultivo';
 import { CultivoService } from '../Services/Cultivo.service';
 
+declare var jQuery:any;
+
 @Component({
   selector: 'app-gestion-cultivos',
   templateUrl: './gestion-cultivos.component.html',
@@ -15,6 +17,7 @@ export class GestionCultivosComponent implements OnInit {
 	public visualizarFormulario: boolean = false;
 	public GuardarCultivo = this.RegistrarCultivo;
 
+	public accion:string;
 	private cultivoId:number;
 	private cultivoEstado:string;
 
@@ -41,10 +44,13 @@ export class GestionCultivosComponent implements OnInit {
 
 	public AbrirModalNuevoCultivo(){
 		this.visualizarFormulario = true;
+		this.cultivoForm.reset();
+		this.accion = 'Registrar';
 		this.GuardarCultivo = this.RegistrarCultivo;
 	}
 	public AbrirModalEditarCultivo(cultivo:Cultivo){
 		this.visualizarFormulario = true;
+		this.accion = 'Editar';
 		this.cultivoId = cultivo.id;
 		this.cultivoEstado = cultivo.estado;
 		this.cultivoForm.patchValue({

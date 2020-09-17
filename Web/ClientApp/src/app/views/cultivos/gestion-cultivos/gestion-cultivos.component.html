@@ -3,32 +3,40 @@
         <span class="pull-left"><i class="fa fa-tree m-r-xs"></i> Cultivos</span>
         <button class="btn btn-primary" (click)='AbrirModalNuevoCultivo()'>Nuevo Cultivo <i class="fa fa-plus m-l-xs"></i></button>
     </div>
-    <div class="panel-boddy">
-        <form [formGroup]='cultivoForm' *ngIf='visualizarFormulario' class="m-b-md">
-            <div class="row p-w-md">
-                <div class="col-sm-12 col-md-5">
-                    <label>Nombre</label>
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-address-card"></i>
-                        </div>
-                        <input type="text" class="form-control" formControlName='nombre'>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-5">
-                    <label>Fecha Siembra</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar-o"></i>
-                        </div>
-                        <input type="date" class="form-control" formControlName='fechaSiembra'>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-2">
-                    <button class="btn btn-primary m-t-md" (click)='GuardarCultivo()' [disabled]='cultivoForm.invalid'> Guardar <i class="m-l-xs fa fa-save"></i></button>
-                </div>
+    <div class="panel-body">
+        <div class="panel panel-default" *ngIf='visualizarFormulario'>
+            <div class="panel-heading text-right">
+                <span class="pull-left">{{accion}} Cultivo</span>
+                <i class="fa fa-times" (click)='visualizarFormulario = false' style="cursor:pointer"></i>
             </div>
-        </form>
+            <div class="panel-body">
+                <form [formGroup]='cultivoForm'>
+                    <div class="row p-w-md">
+                        <div class="col-sm-12 col-md-5">
+                            <label>Nombre</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-address-card"></i>
+                                </div>
+                                <input type="text" class="form-control" formControlName='nombre'>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-5">
+                            <label>Fecha Siembra</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar-o"></i>
+                                </div>
+                                <input type="date" class="form-control" formControlName='fechaSiembra'>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2">
+                            <button class="btn btn-primary m-t-md" (click)='GuardarCultivo()' [disabled]='cultivoForm.invalid'> Guardar <i class="m-l-xs fa fa-save"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="table-responsive p-w-sm">
             <table class="table table-bordered table-striped">
                 <thead>
