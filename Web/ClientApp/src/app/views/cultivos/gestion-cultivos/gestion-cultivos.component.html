@@ -20,6 +20,9 @@
                                 </div>
                                 <input type="text" class="form-control" formControlName='nombre'>
                             </div>
+                            <small class="text-danger" *ngIf='cultivoForm.get("nombre").hasError("required") && (cultivoForm.get("nombre").dirty || cultivoForm.get("nombre").touched)'>
+                                El nombre del cultivo es obligatorio
+                            </small>
                         </div>
                         <div class="col-sm-12 col-md-5">
                             <label>Fecha Siembra</label>
@@ -29,6 +32,9 @@
                                 </div>
                                 <input type="date" class="form-control" formControlName='fechaSiembra'>
                             </div>
+                            <small class="text-danger" *ngIf='cultivoForm.get("fechaSiembra").hasError("required") && (cultivoForm.get("fechaSiembra").dirty || cultivoForm.get("fechaSiembra").touched)'>
+                                La fecha de siembra es obligatoria
+                            </small>
                         </div>
                         <div class="col-sm-12 col-md-2">
                             <button class="btn btn-primary m-t-md" (click)='GuardarCultivo()' [disabled]='cultivoForm.invalid'> Guardar <i class="m-l-xs fa fa-save"></i></button>

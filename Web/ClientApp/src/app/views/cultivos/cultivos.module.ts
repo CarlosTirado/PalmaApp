@@ -5,7 +5,6 @@ import { RegistroCultivoComponent } from './registro-cultivo/registro-cultivo.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
-
 @NgModule({
   declarations: [
     GestionCultivosComponent,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cultivo } from '../Models/cultivo';
 import { CultivoService } from '../Services/Cultivo.service';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 declare var jQuery:any;
 
@@ -65,28 +66,37 @@ export class GestionCultivosComponent implements OnInit {
 	}
 
 	private RegistrarCultivo(){
-		const cultivoForm = this.cultivoForm.value;
-		this._cultivoService.RegistrarCultivo(cultivoForm)
-		.subscribe(response =>{
-			if(!response) return;
-			this.ConsultarCultivos();
-		})
+		this.ConfirmMessage('question','','',(result)=>{
+			const cultivoForm = this.cultivoForm.value;
+			this._cultivoService.RegistrarCultivo(cultivoForm)
+			.subscribe(response =>{
+				if(!response) return;
+				this.ConsultarCultivos();
+				this.ShowMessage('success',response.mensaje);
+			})			
+		});
 	}
 
 	private EditarCultivo(){
-		const cultivoForm = this.cultivoForm.value;
-		this._cultivoService.EditarCultivo(this.cultivoId, cultivoForm.nombre, cultivoForm.fechaSiembra, this.cultivoEstado)
-		.subscribe(response =>{
-			if(!response) return;
-			this.ConsultarCultivos();
+		this.ConfirmMessage('question','','',(result)=>{
+			const cultivoForm = this.cultivoForm.value;
+			this._cultivoService.EditarCultivo(this.cultivoId, cultivoForm.nombre, cultivoForm.fechaSiembra, this.cultivoEstado)
+			.subscribe(response =>{
+				if(!response) return;
+				this.ConsultarCultivos();
+				this.ShowMessage('success',response.mensaje);
+			})
 		})
 	}
 
 	public EliminarCultivo(cultivo:Cultivo){
-		this._cultivoService.InactivarCultivo(cultivo.id, cultivo.nombre, cultivo.fechaSiembra)
-		.subscribe(response =>{
-			if(!response) return;
-			this.ConsultarCultivos();
+		this.ConfirmMessage('warning','','',(result)=>{
+			this._cultivoService.InactivarCultivo(cultivo.id, cultivo.nombre, cultivo.fechaSiembra)
+			.subscribe(response =>{
+				if(!response) return;
+				this.ShowMessage('success',response.mensaje);
+				this.ConsultarCultivos();
+			})
 		})
 	}
 
@@ -95,6 +105,32 @@ export class GestionCultivosComponent implements OnInit {
 			nombre: [undefined, [Validators.required]],
 			fechaSiembra: [undefined, [Validators.required]],
 		})
+	}
+
+	private ShowMessage(type:'success'|'error'|'warning'|'info',message:string, title:string=null){
+		Swal.fire({
+			title: title,
+			text: message,
+			icon: type /**success|error|warning|info|question**/,
+			showConfirmButton: false,
+			timer: 2500
+		  });
+	}
+
+	private ConfirmMessage(type:'warning'|'question', message:string, title:string=null, successEvent){
+		Swal.fire({
+			icon: type,
+			title: title ? title : "¿Está seguro de realizar esta operación?",
+			text: message,
+			showCancelButton: true,
+			confirmButtonText: 'Si',
+			cancelButtonText: 'No'
+		  })
+		  .then((result) => {
+			  if (result.value) { /**cuando doy clic en si */
+				successEvent(result.value);	
+			}
+		  })
 	}
 
 }
