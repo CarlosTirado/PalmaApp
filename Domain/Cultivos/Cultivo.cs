@@ -12,14 +12,17 @@ namespace Domain.Cultivos
             Nombre = nombre;
             FechaSiembra = fechaSiembra;
             Estado = EstadoGeneralEnumeration.Activo.Id;
+
+            _lotes = new List<Lote>();
         }
 
         public long Id { get; private set; }
         public string Nombre { get; private set; }
         public DateTime FechaSiembra { get; private set; }
         public string Estado { get; private set; }
-        public virtual IReadOnlyCollection<Lote> Lotes { get; private set; }
-        private ICollection<Lote> _lotes => (Lotes as ICollection<Lote>);
+
+        private readonly List<Lote> _lotes;
+        public IReadOnlyCollection<Lote> Lotes => _lotes.AsReadOnly();
 
         public void Editar(string nombre, DateTime fechaSiembra, string estado)
         {

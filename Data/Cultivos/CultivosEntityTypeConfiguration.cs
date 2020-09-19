@@ -15,6 +15,10 @@ namespace Data.Cultivos.Mappers
         {
             builder.ToTable(typeof(Cultivo).Name, PalmAppContext.DEFAULT_SCHEMA);
             builder.HasKey(t => t.Id);
+
+            var navigationLotes = builder.Metadata.FindNavigation(nameof(Cultivo.Lotes));
+            navigationLotes.SetField("_lotes");
+            navigationLotes.SetPropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }
