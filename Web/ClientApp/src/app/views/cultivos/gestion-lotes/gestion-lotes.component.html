@@ -1,4 +1,9 @@
 <div class="panel">
+    <div class="panel-heading h4 text-right">
+        <span class="pull-left"><i class="fa fa-tree m-r-xs"></i> Cultivo - {{cultivo?.nombre}}</span>
+        <span class="label" [ngClass]='{"label-primary": cultivo?.estado == "AC", "label-danger": cultivo?.estado != "AC"}'>{{cultivo?.estado == 'AC' ? 'ACTIVO': 'INACTIVO'}}</span>
+    </div>
+
     <div class="panel-heading h5 text-right">
         <span class="pull-left"><i class="fa fa-cubes m-r-xs"></i> Lotes</span>
         <button class="btn btn-primary" (click)='AbrirModalNuevolote()'>Nuevo Lote <i class="fa fa-plus m-l-xs"></i></button>
