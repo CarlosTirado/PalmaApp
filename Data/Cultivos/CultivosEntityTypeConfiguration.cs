@@ -16,9 +16,8 @@ namespace Data.Cultivos.Mappers
             builder.ToTable(typeof(Cultivo).Name, PalmAppContext.DEFAULT_SCHEMA);
             builder.HasKey(t => t.Id);
 
-            var navigationLotes = builder.Metadata.FindNavigation(nameof(Cultivo.Lotes));
-            navigationLotes.SetField("_lotes");
-            navigationLotes.SetPropertyAccessMode(PropertyAccessMode.Field);
+            builder.HasMany(x => x.Lotes).WithOne(t=> t.Cultivo).HasForeignKey(x => x.CultivoId).OnDelete(DeleteBehavior.Restrict);
+            builder.Metadata.FindNavigation(nameof(Cultivo.Lotes)).SetPropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }
