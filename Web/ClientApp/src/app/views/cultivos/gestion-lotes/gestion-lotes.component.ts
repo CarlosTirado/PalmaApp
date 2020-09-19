@@ -53,6 +53,7 @@ export class GestionLotesComponent implements OnInit {
 		.subscribe(response =>{
 			if(!response) return;
 			this.cultivo = response;
+			this.ConsultarLotes();
 		})
 	}
   
@@ -61,14 +62,14 @@ export class GestionLotesComponent implements OnInit {
 		.subscribe(response =>{
 			if(!response) return;
 			this.lotes = response;
-			this.loteForm.reset();
+			this.loteForm.reset({cultivoId: this.cultivoId});
 			this.visualizarFormulario = false;
 		})
   	}
 
 	public AbrirModalNuevoLote(){
 		this.visualizarFormulario = true;
-		this.loteForm.reset();
+		this.loteForm.reset({cultivoId: this.cultivoId});
 		this.accion = 'Registrar';
 		this.GuardarLote = this.RegistrarLote;
 	}
@@ -80,7 +81,7 @@ export class GestionLotesComponent implements OnInit {
 		this.loteForm.patchValue({
 			cultivoId: lote.cultivoId,
 			nombre: lote.nombre,
-			cantidadHectareas: lote.cantidadHectareas
+			numeroHectareas: lote.numeroHectareas
 		});
 		this.GuardarLote = this.EditarLote;
 	}
@@ -100,7 +101,7 @@ export class GestionLotesComponent implements OnInit {
 	private EditarLote(){
 		this.ConfirmMessage('question','','',(result)=>{
 			const loteForm = this.loteForm.value;
-			this._loteService.EditarLote(this.cultivoId, this.loteId, loteForm.nombre, loteForm.cantidadHectareas, this.loteEstado)
+			this._loteService.EditarLote(this.cultivoId, this.loteId, loteForm.nombre, loteForm.numeroHectareas, this.loteEstado)
 			.subscribe(response =>{
 				if(!response) return;
 				this.ConsultarLotes();
@@ -111,7 +112,7 @@ export class GestionLotesComponent implements OnInit {
 
 	public EliminarLote(lote:Lote){
 		this.ConfirmMessage('warning','','',(result)=>{
-			this._loteService.InactivarLote(this.cultivoId, lote.id, lote.nombre, lote.cantidadHectareas)
+			this._loteService.InactivarLote(this.cultivoId, lote.id, lote.nombre, lote.numeroHectareas)
 			.subscribe(response =>{
 				if(!response) return;
 				this.ShowMessage('success',response.mensaje);
@@ -124,7 +125,7 @@ export class GestionLotesComponent implements OnInit {
 		return this._formBuilder.group({
 			cultivoId: [this.cultivoId, [Validators.required]],
 			nombre: [undefined, [Validators.required]],
-			cantidadHectareas: [undefined, [Validators.required]],
+			numeroHectareas: [undefined, [Validators.required]],
 		})
 	}
 

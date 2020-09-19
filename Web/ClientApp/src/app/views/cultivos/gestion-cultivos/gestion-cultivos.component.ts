@@ -34,7 +34,7 @@ export class GestionCultivosComponent implements OnInit {
 	}
 
 	public IrAGestionLotes(cultivo:Cultivo){
-		this._router.navigate[`/cultivos/${cultivo.id}/lotes`];
+		this._router.navigate([`/cultivos/${cultivo.id}/Lotes`]);
 	}	
 
 	private ConsultarCultivos(){

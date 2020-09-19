@@ -22,12 +22,12 @@ export class LoteService {
 		return this._http.post<LoteResponse>(`api/Lote`, lote);
 	}
 
-	public EditarLote(cultivoId:number, loteId:number, nombre:string, cantidadHectareas:number, estado:string): Observable<LoteResponse> {
-		return this._http.put<LoteResponse>(`api/Lote`, {cultivoId, loteId, nombre, cantidadHectareas, estado});
+	public EditarLote(cultivoId:number, loteId:number, nombre:string, numeroHectareas:number, estado:string): Observable<LoteResponse> {
+		return this._http.put<LoteResponse>(`api/Lote`, {cultivoId, loteId, nombre, numeroHectareas, estado});
 	}
 
-	public InactivarLote(cultivoId:number, loteId:number, nombre:string, cantidadHectareas:number): Observable<LoteResponse> {
-		return this._http.put<LoteResponse>(`api/Lote`, {cultivoId, loteId, nombre, cantidadHectareas, estado: 'IN'});
+	public InactivarLote(cultivoId:number, loteId:number, nombre:string, numeroHectareas:number): Observable<LoteResponse> {
+		return this._http.put<LoteResponse>(`api/Lote`, {cultivoId, loteId, nombre, numeroHectareas, estado: 'IN'});
 	}
   
 }

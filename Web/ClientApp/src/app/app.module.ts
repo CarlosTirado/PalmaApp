@@ -16,6 +16,8 @@ import { LayoutsModule } from "./components/common/layouts/layouts.module";
 import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor';
 import { ApiAuthorizationModule } from '../api-authorization/api-authorization.module';
 import { CultivosModule } from './views/cultivos/cultivos.module';
+import { UsuariosModule } from './usuarios/usuarios.module';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { CultivosModule } from './views/cultivos/cultivos.module';
     LayoutsModule,
     CultivosModule,
     AppviewsModule,
+    UsuariosModule,
     RouterModule.forRoot(ROUTES),
     ApiAuthorizationModule
   ],

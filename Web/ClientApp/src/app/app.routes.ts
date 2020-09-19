@@ -8,6 +8,7 @@ import { BasicLayoutComponent } from "./components/common/layouts/basicLayout.co
 import { AuthorizeGuard } from "../api-authorization/authorize.guard";
 import { GestionCultivosComponent } from "./views/cultivos/gestion-cultivos/gestion-cultivos.component";
 import { RegistroCultivoComponent } from "./views/cultivos/registro-cultivo/registro-cultivo.component";
+import { GestionUsuariosComponent } from "./usuarios/gestion-usuarios/gestion-usuarios.component";
 import { GestionLotesComponent } from "./views/cultivos/gestion-lotes/gestion-lotes.component";
 
 export const ROUTES: Routes = [
@@ -20,6 +21,13 @@ export const ROUTES: Routes = [
     children: [
       { path: 'gestion', component: GestionCultivosComponent, canActivate: [AuthorizeGuard] },
       { path: ':cultivoId/Lotes', component: GestionLotesComponent, canActivate: [AuthorizeGuard] },
+    ]
+  },
+  // Ruta para la gestion de usuario
+  {
+    path: 'usuarios', component: BasicLayoutComponent,
+    children: [
+      { path: 'gestion', component: GestionUsuariosComponent, canActivate: [AuthorizeGuard] },
     ]
   },
   {
