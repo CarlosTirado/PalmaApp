@@ -14,10 +14,10 @@ namespace Domain.Cultivos
             Estado = EstadoGeneralEnumeration.Activo.Id;
         }
 
-        public long Id { get; set; }
-        public string Nombre { get; set; }
-        public DateTime FechaSiembra { get; set; }
-        public string Estado { get; set; }
+        public long Id { get; private set; }
+        public string Nombre { get; private set; }
+        public DateTime FechaSiembra { get; private set; }
+        public string Estado { get; private set; }
 
         public void Editar(string nombre, DateTime fechaSiembra, string estado)
         {
