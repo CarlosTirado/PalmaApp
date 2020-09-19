@@ -3,8 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cultivo } from '../Models/cultivo';
 import { CultivoService } from '../Services/Cultivo.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-
-declare var jQuery:any;
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gestion-cultivos',
@@ -24,6 +23,7 @@ export class GestionCultivosComponent implements OnInit {
 
 	constructor(
 		private _formBuilder: FormBuilder,
+		private _router:Router,
 		private _cultivoService: CultivoService
 	) { }
 
@@ -32,6 +32,10 @@ export class GestionCultivosComponent implements OnInit {
 		this.ConsultarCultivos();
 		this.cultivoForm = this.InicializarFormulario();
 	}
+
+	public IrAGestionLotes(cultivo:Cultivo){
+		this._router.navigate([`/cultivos/${cultivo.id}/Lotes`]);
+	}	
 
 	private ConsultarCultivos(){
 		this._cultivoService.ConsultarCultivos()

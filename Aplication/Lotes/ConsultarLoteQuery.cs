@@ -21,7 +21,7 @@ namespace Aplication.Lotes
 
         public Task<ConsultarLotesResponse> Handle(ConsultarLotesRequest request, CancellationToken cancellationToken)
         {
-            var lotes = _palmAppUnitOfWork.LoteRepository.Gets();
+            var lotes = _palmAppUnitOfWork.CultivoRepository.GetLotes(request.CultivoId);
             var lotesView = lotes.Select(t => new LoteModelView()
             {
                 Id = t.Id,
@@ -36,6 +36,7 @@ namespace Aplication.Lotes
     }
     public class ConsultarLotesRequest : IRequest<ConsultarLotesResponse>
     {
+        public long CultivoId { get; set; }
     }
     public class ConsultarLotesResponse
     {

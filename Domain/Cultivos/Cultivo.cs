@@ -19,12 +19,18 @@ namespace Domain.Cultivos
         public DateTime FechaSiembra { get; private set; }
         public string Estado { get; private set; }
         public virtual IReadOnlyCollection<Lote> Lotes { get; private set; }
+        private ICollection<Lote> _lotes => (Lotes as ICollection<Lote>);
 
         public void Editar(string nombre, DateTime fechaSiembra, string estado)
         {
             Nombre = nombre;
             FechaSiembra = fechaSiembra;
             Estado = estado;
+        }
+
+        public void AgregarLote(Lote lote)
+        {
+            _lotes.Add(lote);
         }
     }
 }
