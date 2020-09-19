@@ -13,6 +13,5 @@ namespace Domain.Base
         int Commit();
         ITerceroRepository TerceroRepository { get; }
         ICultivoRepository CultivoRepository { get; }
-        ILoteRepository LoteRepository { get; }
     }
 }

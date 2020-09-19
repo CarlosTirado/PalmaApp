@@ -17,7 +17,7 @@ namespace Aplication.Lotes
 
         public Task<ConsultarLotePorIdResponse> Handle(ConsultarLotePorIdRequest request, CancellationToken cancellationToken)
         {
-            var lote = _palmAppUnitOfWork.LoteRepository.Get(request.LoteId);
+            var lote = _palmAppUnitOfWork.CultivoRepository.GetLotePorId(request.LoteId);
             var loteView = new LoteModelView()
             {
                 Id = lote.Id,

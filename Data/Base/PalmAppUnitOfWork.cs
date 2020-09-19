@@ -33,8 +33,5 @@ namespace Data.Base
 
         private ICultivoRepository _cultivoRepository;
         public ICultivoRepository CultivoRepository { get { return _cultivoRepository ?? (_cultivoRepository = new CultivoRepository(_context)); } }
-
-        private ILoteRepository _loteRepository;
-        public ILoteRepository LoteRepository { get { return _loteRepository ?? (_loteRepository = new LoteRepository(_context)); } }
     }
 }

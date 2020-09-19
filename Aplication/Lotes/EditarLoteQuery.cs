@@ -21,15 +21,28 @@ namespace Aplication.Lotes
 
         public Task<EditarLoteResponse> Handle(EditarLoteRequest request, CancellationToken cancellationToken)
         {
-            var Lote = _palmAppUnitOfWork.LoteRepository.Get(request.LoteId);
+            var cultivo = _palmAppUnitOfWork.CultivoRepository.Get(request.CultivoId);
+            if(cultivo == null)
+            {
+                return Task.FromResult(new EditarLoteResponse("No se ha podido encontrar el Cultivo que contenga ese Lote"));
+            }
 
-            Lote.Editar(request.Nombre, request.NumeroHectareas, request.Estado);
+            var lote = cultivo.Lotes.FirstOrDefault(t => t.Id == request.LoteId);
+            if (lote == null)
+            {
+                return Task.FromResult(new EditarLoteResponse("No se ha podido encontrar el Lote que intenta editar"));
+            }
+
+            lote.Editar(request.Nombre, request.NumeroHectareas, request.Estado);
+
             _palmAppUnitOfWork.Commit();
-            return Task.FromResult(new EditarLoteResponse(Lote.Id));
+
+            return Task.FromResult(new EditarLoteResponse(lote.Id));
         }
     }
     public class EditarLoteRequest : IRequest<EditarLoteResponse>
     {
+        public long CultivoId { get; set; }
         public long LoteId { get; set; }
         public string Nombre { get; set; }
         public int NumeroHectareas { get; set; }
@@ -41,6 +54,11 @@ namespace Aplication.Lotes
         {
             LoteEditadoId = loteEditadoId;
             Mensaje = "Operación realizada correctamente";
+        }
+
+        public EditarLoteResponse(string mensajeError)
+        {
+            Mensaje = mensajeError;
         }
 
         public long LoteEditadoId { get; set; }

@@ -21,9 +21,17 @@ namespace Aplication.Lotes
 
         public Task<RegistrarLoteResponse> Handle(RegistrarLoteRequest request, CancellationToken cancellationToken)
         {
-            var lote = new Lote(request.CultivoId, request.Nombre, request.NumeroHectareas);
-            _palmAppUnitOfWork.LoteRepository.Add(lote);
+            var cultivo = _palmAppUnitOfWork.CultivoRepository.Get(request.CultivoId);
+            if (cultivo == null)
+            {
+                return Task.FromResult(new RegistrarLoteResponse("No se ha podido encontrar el Cultivo que contenga ese Lote"));
+            }
+
+            var lote = new Lote(cultivo.Id, request.Nombre, request.NumeroHectareas);
+            cultivo.AgregarLote(lote);
+
             _palmAppUnitOfWork.Commit();
+
             return Task.FromResult(new RegistrarLoteResponse(lote.Id));
         }
     }
@@ -49,6 +57,13 @@ namespace Aplication.Lotes
             Mensaje = "Operación realizada correctamente";
 
         }
+
+        public RegistrarLoteResponse(string mensajeError)
+        {
+            Mensaje = mensajeError;
+        }
+
+
         public string Mensaje { get; set; }
         public long LoteRegistradoId { get; set; }
     }
