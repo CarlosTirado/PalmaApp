@@ -2,6 +2,7 @@
 using Domain.Cultivos;
 using Domain.DatosBasicos;
 using Domain.DatosBasicos.EstadosGenerales;
+using Domain.Lotes;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,25 @@ namespace Data.Cultivos
         public void Add(Cultivo cultivo)
         {
             _context.Cultivos.Add(cultivo);
+        }
+
+        public Lote GetLotePorId(long loteId)
+        {
+            var lote = _context.Lotes
+                .FirstOrDefault(t =>
+                    t.Estado == EstadoGeneralEnumeration.Activo.Id &&
+                    t.Id == loteId);
+            return lote;
+        }
+
+        public ICollection<Lote> GetLotes(long cultivoId)
+        {
+            var lotes = _context.Lotes
+                .Where(t =>
+                    t.Estado == EstadoGeneralEnumeration.Activo.Id &&
+                    t.CultivoId == cultivoId)
+                .ToList();
+            return lotes;
         }
     }
 }

@@ -28,9 +28,8 @@ namespace Domain.Cultivos
             Estado = estado;
         }
 
-        public void AgregarLote(string nombre, int numeroHectareas)
+        public void AgregarLote(Lote lote)
         {
-            var lote = new Lote(cultivoId: Id, nombre, numeroHectareas);
             _lotes.Add(lote);
         }
     }
