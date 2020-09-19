@@ -32,9 +32,9 @@ namespace Data.Lotes
             return Lote;
         }
 
-        public void Add(Lote Lote)
+        public void Add(Lote lote)
         {
-            _context.Lotes.Add(Lote);
+            _context.Lotes.Add(lote);
         }
     }
 }

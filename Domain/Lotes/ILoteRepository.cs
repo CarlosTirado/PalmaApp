@@ -9,6 +9,6 @@ namespace Domain.Lotes
     {
         ICollection<Lote> Gets();
         Lote Get(long id);
-        void Add(Lote cultivo);
+        void Add(Lote lote);
     }
 }

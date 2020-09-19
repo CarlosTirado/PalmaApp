@@ -1,7 +1,7 @@
 ﻿using Domain.DatosBasicos.EstadosGenerales;
+using Domain.Lotes;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Domain.Cultivos
 {
@@ -18,6 +18,7 @@ namespace Domain.Cultivos
         public string Nombre { get; private set; }
         public DateTime FechaSiembra { get; private set; }
         public string Estado { get; private set; }
+        public virtual IReadOnlyCollection<Lote> Lotes { get; private set; }
 
         public void Editar(string nombre, DateTime fechaSiembra, string estado)
         {
