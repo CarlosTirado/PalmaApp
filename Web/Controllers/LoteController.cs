@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Aplication.Cultivos;
+using Aplication.Cultivos.ModelView;
 using Aplication.Lotes;
 using Aplication.Lotes.ModelView;
 using MediatR;
@@ -16,6 +18,20 @@ namespace Web.Controllers
         public LoteController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet("GetCultivo/{cultivoId}")]
+        public async Task<ActionResult<CultivoModelView>> GetCultivoId(long cultivoId)
+        {
+            var response = await _mediator.Send(new ConsultarCultivoPorIdRequest { CultivoId = cultivoId });
+            return Ok(response.Cultivo);
+        }
+
+        [HttpGet("Cultivo/{cultivoId}")]
+        public async Task<ActionResult<List<LoteModelView>>> GetsPorCultivoId(long cultivoId)
+        {
+            var response = await _mediator.Send(new ConsultarLotesRequest { CultivoId = cultivoId });
+            return Ok(response.Lotes);
         }
 
         [HttpGet("")]
