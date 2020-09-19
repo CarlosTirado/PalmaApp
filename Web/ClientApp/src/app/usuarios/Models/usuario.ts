@@ -6,4 +6,5 @@ export class Usuario{
     public direccion:string;
     public email:string;
     public fechaNacimiento:Date;
+    public estado:string;
 }

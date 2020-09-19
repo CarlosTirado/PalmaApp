@@ -11,13 +11,16 @@ export class UsuarioService {
 	constructor(private _http: HttpClient) { }
 
 	public ConsultarUsuarios(): Observable<Usuario[]> {
-		return this._http.get<Usuario[]>(`api/Usuario`);
-	}
-  
+		return this._http.get<Usuario[]>(`api/Tercero`);
+  }
+
+  //public EditarUsuario(cultivoId: number, nombre: string, fechaSiembra: Date, estado: string): Observable<UsuarioResponse> {
+  //  return this._http.put<UsuarioResponse>(`api/Tercero`, { cultivoId, nombre, fechaSiembra, estado });
+  //}
 }
 
-//export class CultivoResponse{
-//	public cultivoRegistradoId:number;
-//	public cultivoEditadoId:number;
+//export class UsuarioResponse{
+//	public usuarioRegistradoId:number;
+//	public usuarioEditadoId:number;
 //	public mensaje:string;
 //}
