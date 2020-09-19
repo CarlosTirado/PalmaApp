@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Aplication.DatosBasicos.Tercero;
+using Data.Context;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +17,13 @@ namespace Web.Controllers
     public class AccountController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
-        public AccountController(ApplicationDbContext db)
+        private readonly PalmAppContext _dbPalmApp;
+        public AccountController(
+            ApplicationDbContext db,
+            PalmAppContext dbPalmApp)
         {
             _db = db;
+            _dbPalmApp = dbPalmApp;
         }
 
         // GET: api/Account/User/{username}/Roles
@@ -38,6 +44,22 @@ namespace Web.Controllers
                 .ToList();
 
             return Ok(userRoles);
+        }
+
+        [HttpGet("UsersTerceros")]
+        public ActionResult<List<TerceroModelView>> GetUsersTerceros()
+        {
+            var users = _db.Users.ToList();
+            var terceros = _dbPalmApp.Terceros.ToList();
+
+            var usersTerceros =  users.Join(terceros,
+                    user => user.Email,
+                    tercero => tercero.Email,
+                    (user, tercero) => tercero)
+                .Select(tercero => tercero)
+                .ToList();
+
+            return Ok(usersTerceros);
         }
     }
 

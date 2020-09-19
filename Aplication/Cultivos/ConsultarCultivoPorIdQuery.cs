@@ -1,6 +1,8 @@
 ﻿using Aplication.Cultivos.ModelView;
+using Aplication.Lotes.ModelView;
 using Domain.Base;
 using MediatR;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,7 +25,14 @@ namespace Aplication.Cultivos
                 Id = cultivo.Id,
                 Estado = cultivo.Estado,
                 FechaSiembra = cultivo.FechaSiembra,
-                Nombre = cultivo.Nombre
+                Nombre = cultivo.Nombre,
+                Lotes = cultivo.Lotes.Select(t=> new LoteModelView()
+                {
+                    Id = t.Id,
+                    Estado = t.Estado,
+                    Nombre = t.Nombre,
+                    NumeroHectareas = t.NumeroHectareas
+                }).ToList()
             };
 
             return Task.FromResult(new ConsultarCultivoPorIdResponse(cultivoView));

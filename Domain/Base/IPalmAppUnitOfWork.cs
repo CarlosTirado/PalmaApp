@@ -1,5 +1,6 @@
 ﻿using Domain.Cultivos;
 using Domain.DatosBasicos;
+using Domain.Lotes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,5 +13,6 @@ namespace Domain.Base
         int Commit();
         ITerceroRepository TerceroRepository { get; }
         ICultivoRepository CultivoRepository { get; }
+        ILoteRepository LoteRepository { get; }
     }
 }

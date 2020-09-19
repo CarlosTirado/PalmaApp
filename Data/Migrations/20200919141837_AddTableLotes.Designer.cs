@@ -4,14 +4,16 @@ using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(PalmAppContext))]
-    partial class PalmAppContextModelSnapshot : ModelSnapshot
+    [Migration("20200919141837_AddTableLotes")]
+    partial class AddTableLotes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,9 +85,6 @@ namespace Data.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("CultivoId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Estado")
                         .HasColumnType("nvarchar(max)");
 
@@ -97,18 +96,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CultivoId");
-
                     b.ToTable("Lote","PalmApp");
-                });
-
-            modelBuilder.Entity("Domain.Lotes.Lote", b =>
-                {
-                    b.HasOne("Domain.Cultivos.Cultivo", "Cultivo")
-                        .WithMany("Lotes")
-                        .HasForeignKey("CultivoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

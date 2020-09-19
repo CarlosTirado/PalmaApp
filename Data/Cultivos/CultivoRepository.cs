@@ -2,6 +2,7 @@
 using Domain.Cultivos;
 using Domain.DatosBasicos;
 using Domain.DatosBasicos.EstadosGenerales;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +27,11 @@ namespace Data.Cultivos
 
         public Cultivo Get(long id)
         {
-            var Cultivo = _context.Cultivos.FirstOrDefault(t => 
-                t.Estado == EstadoGeneralEnumeration.Activo.Id &&
-                t.Id == id);
+            var Cultivo = _context.Cultivos
+                .Include(t => t.Lotes)
+                .FirstOrDefault(t =>
+                    t.Estado == EstadoGeneralEnumeration.Activo.Id &&
+                    t.Id == id);
             return Cultivo;
         }
 
