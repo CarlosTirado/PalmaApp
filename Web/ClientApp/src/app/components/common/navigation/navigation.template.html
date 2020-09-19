@@ -30,12 +30,21 @@
       <li *ngIf="estaAutenticado" [ngClass]="{active: activeRoute('starter')}">
         <a [routerLink]="['/starterview']"><i class="fa fa-home"></i> <span class="nav-label">Inicio</span></a>
       </li>
+
+      <li *ngIf="estaAutenticado" [ngClass]="{active: activeRoute('usuarios')}">
+        <a><i class="fa fa-archive"></i> <span class="nav-label">Usuarios</span> <span class="fa arrow"></span> </a>
+        <ul class="nav nav-second-level collapse" [ngClass]="{in: activeRoute('usuarios')}">
+          <li [ngClass]="{active: activeRoute('gestion-usuarios')}"><a [routerLink]="['/usuarios/gestion']">Gestión</a></li>
+        </ul>
+      </li>
+
       <li *ngIf="estaAutenticado" [ngClass]="{active: activeRoute('cultivos')}">
         <a><i class="fa fa-archive"></i> <span class="nav-label">Cultivos</span> <span class="fa arrow"></span> </a>
         <ul class="nav nav-second-level collapse" [ngClass]="{in: activeRoute('cultivos')}">
           <li [ngClass]="{active: activeRoute('gestion-cultivos')}"><a [routerLink]="['/cultivos/gestion']">Gestión</a></li>
         </ul>
       </li>
+
       <li *ngIf="!estaAutenticado" [ngClass]="{active: activeRoute('login')}">
         <a [routerLink]="['/authentication/login']"><i class="fa fa-sign-in"></i> <span class="nav-label">Login</span></a>
       </li>

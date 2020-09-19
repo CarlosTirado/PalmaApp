@@ -8,6 +8,7 @@ import { BasicLayoutComponent } from "./components/common/layouts/basicLayout.co
 import { AuthorizeGuard } from "../api-authorization/authorize.guard";
 import { GestionCultivosComponent } from "./views/cultivos/gestion-cultivos/gestion-cultivos.component";
 import { RegistroCultivoComponent } from "./views/cultivos/registro-cultivo/registro-cultivo.component";
+import { GestionUsuariosComponent } from "./usuarios/gestion-usuarios/gestion-usuarios.component";
 
 export const ROUTES: Routes = [
   // Main redirect
@@ -19,6 +20,13 @@ export const ROUTES: Routes = [
     children: [
       { path: 'gestion', component: GestionCultivosComponent, canActivate: [AuthorizeGuard] },
       { path: 'registro', component: RegistroCultivoComponent, canActivate: [AuthorizeGuard] },
+    ]
+  },
+  // Ruta para la gestion de usuario
+  {
+    path: 'usuarios', component: BasicLayoutComponent,
+    children: [
+      { path: 'gestion', component: GestionUsuariosComponent, canActivate: [AuthorizeGuard] },
     ]
   },
   {
