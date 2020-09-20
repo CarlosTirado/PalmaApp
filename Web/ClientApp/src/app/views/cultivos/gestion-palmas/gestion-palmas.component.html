@@ -2,22 +2,22 @@
     <button class="m-t-xs m-l-xs btn btn-xs btn-circle m-r-sm" (click)='irAtras()'><i class="fa fa-arrow-left"></i></button>
     <div class="panel-heading h4 text-right">
         <span class="pull-left">
-            <i class="fa fa-tree m-r-xs"></i> Cultivo - {{cultivo?.nombre}}</span>
-        <span class="label" [ngClass]='{"label-success": cultivo?.estado == "AC", "label-danger": cultivo?.estado != "AC"}'>{{cultivo?.estado == 'AC' ? 'ACTIVO': 'INACTIVO'}}</span>
+            <i class="fa fa-cubes m-r-xs"></i> Lote - {{lote?.nombre}}</span>
+        <span class="label" [ngClass]='{"label-success": lote?.estado == "AC", "label-danger": lote?.estado != "AC"}'>{{lote?.estado == 'AC' ? 'ACTIVO': 'INACTIVO'}}</span>
     </div>
     <div class="p-w-sm">
         <div class="panel-heading h5 text-right m-b-n">
-            <span class="pull-left"><i class="fa fa-cubes m-r-xs"></i> Lotes</span>
-            <button class="btn btn-primary" (click)='AbrirModalNuevoLote()'>Nuevo Lote <i class="fa fa-plus m-l-xs"></i></button>
+            <span class="pull-left"><i class="fa fa-pagelines m-r-xs"></i> Palmas</span>
+            <button class="btn btn-primary" (click)='AbrirModalNuevoLote()'>Nueva Palma <i class="fa fa-plus m-l-xs"></i></button>
         </div>
         <div class="panel-body">
             <div class="panel panel-default" *ngIf='visualizarFormulario'>
                 <div class="panel-heading text-right">
-                    <span class="pull-left">{{accion}} lote</span>
+                    <span class="pull-left">{{accion}} Palma</span>
                     <i class="fa fa-times" (click)='visualizarFormulario = false' style="cursor:pointer"></i>
                 </div>
                 <div class="panel-body">
-                    <form [formGroup]='loteForm'>
+                    <form [formGroup]='palmaForm'>
                         <div class="row p-w-md">
                             <div class="col-sm-12 col-md-5">
                                 <label>Nombre</label>
@@ -27,7 +27,7 @@
                                     </div>
                                     <input type="text" class="form-control" formControlName='nombre'>
                                 </div>
-                                <small class="text-danger" *ngIf='loteForm.get("nombre").hasError("required") && (loteForm.get("nombre").dirty || loteForm.get("nombre").touched)'>
+                                <small class="text-danger" *ngIf='palmaForm.get("nombre").hasError("required") && (palmaForm.get("nombre").dirty || palmaForm.get("nombre").touched)'>
                                     El nombre del lote es obligatorio
                                 </small>
                             </div>
@@ -39,12 +39,12 @@
                                     </div>
                                     <input type="number" class="form-control" formControlName='numeroHectareas'>
                                 </div>
-                                <small class="text-danger" *ngIf='loteForm.get("numeroHectareas").hasError("required") && (loteForm.get("numeroHectareas").dirty || loteForm.get("numeroHectareas").touched)'>
+                                <small class="text-danger" *ngIf='palmaForm.get("numeroHectareas").hasError("required") && (palmaForm.get("numeroHectareas").dirty || palmaForm.get("numeroHectareas").touched)'>
                                     La cantidad de hectáreas es obligatoria
                                 </small>
                             </div>
                             <div class="col-sm-12 col-md-2">
-                                <button class="btn btn-primary m-t-md" (click)='GuardarLote()' [disabled]='loteForm.invalid'> Guardar <i class="m-l-xs fa fa-save"></i></button>
+                                <button class="btn btn-primary m-t-md" (click)='GuardarLote()' [disabled]='palmaForm.invalid'> Guardar <i class="m-l-xs fa fa-save"></i></button>
                             </div>
                         </div>
                     </form>
@@ -55,28 +55,27 @@
                     <thead>
                         <tr>
                             <th class="text-center">#</th>
+                            <th class="text-center">Codigo</th>
                             <th class="text-center">Nombre</th>
-                            <th class="text-center">Número <abbr title="Hectáreas">Ha</abbr></th>
                             <th class="text-center">Estado</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor='let lote of lotes; index as i'>
+                        <tr *ngFor='let palma of palmas; index as i'>
                             <td class="text-center">{{i+1}}</td>
-                            <td>{{lote.nombre}}</td>
-                            <td class="text-center">{{(lote.numeroHectareas | number)}}</td>
-                            <td class="text-center"> <span class="label" [ngClass]='{"label-primary": lote.estado == "AC", "label-danger": lote.estado != "AC"}'>{{lote.estado == 'AC' ? 'ACTIVO': 'INACTIVO'}}</span></td>
+                            <td class="text-center">{{(palma.codigo)}}</td>
+                            <td>{{palma.nombre}}</td>
+                            <td class="text-center"> <span class="label" [ngClass]='{"label-primary": palma.estado == "AC", "label-danger": palma.estado != "AC"}'>{{palma.estado == 'AC' ? 'ACTIVO': 'INACTIVO'}}</span></td>
                             <td style="width: 175px;" class="text-center">
-                                <button class="btn btn-default btn-xs" (click)='IrAGestionPalmas(cultivo)'>Palmas</button>
-                                <button class="btn btn-default btn-xs" (click)='AbrirModalEditarLote(lote)'>Editar</button>
+                                <button class="btn btn-default btn-xs" (click)='AbrirModalEditarLote(palma)'>Editar</button>
                                 <button class="btn btn-default btn-xs" (click)='EliminarLote(lote)'>Eliminar</button>
                             </td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="5" class="text-center" *ngIf='lotes.length <= 0'><i>No se encontraron lotes registrados en el sistema para el cultivo solicitado</i></td>
+                            <td colspan="5" class="text-center" *ngIf='palmas.length <= 0'><i>No se encontraron palmas registrados en el sistema para el lote solicitado</i></td>
                         </tr>
                     </tfoot>
                 </table>
