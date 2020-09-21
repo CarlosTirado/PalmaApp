@@ -14,7 +14,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 export class GestionUsuariosComponent implements OnInit {
 
   public Usuario: Usuario[];
-  //public usuarioForm: FormGroup;
+  public usuarioForm: FormGroup;
   //public visualizarFormulario: boolean = false;
   //public GuardarUsuario = this.EditarUsuario;
   //public accion: string;

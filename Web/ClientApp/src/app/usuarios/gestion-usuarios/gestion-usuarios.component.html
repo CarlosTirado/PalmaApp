@@ -1,13 +1,13 @@
 <div class="panel">
   <div class="panel-heading h5 text-right">
     <span class="pull-left"><i class="fa fa-tree m-r-xs"></i> Usuarios</span>
-    <button class="btn btn-primary" (click)='AbrirModalNuevoCultivo()'>Nuevo<i class="fa fa-plus m-l-xs"></i></button>
+    <button class="btn btn-primary">Nuevo<i class="fa fa-plus m-l-xs"></i></button>
   </div>
   <div class="panel-body">
-    <div class="panel panel-default" *ngIf='visualizarFormulario'>
+    <div class="panel panel-default">
       <div class="panel-heading text-right">
-        <span class="pull-left">{{accion}} Usuarios</span>
-        <i class="fa fa-times" (click)='visualizarFormulario = false' style="cursor:pointer"></i>
+        <span class="pull-left"></span>
+        <i class="fa fa-times" style="cursor:pointer"></i>
       </div>
       <!--<div class="panel-body">
         <form [formGroup]='UsuarioForm'>
