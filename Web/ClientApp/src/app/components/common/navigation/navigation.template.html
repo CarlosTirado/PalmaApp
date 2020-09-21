@@ -32,7 +32,7 @@
       </li>
 
       <li *ngIf="estaAutenticado" [ngClass]="{active: activeRoute('usuarios')}">
-        <a><i class="fa fa-archive"></i> <span class="nav-label">Usuarios</span> <span class="fa arrow"></span> </a>
+        <a><i class="fa fa-address-book"></i> <span class="nav-label">Usuarios</span> <span class="fa arrow"></span> </a>
         <ul class="nav nav-second-level collapse" [ngClass]="{in: activeRoute('usuarios')}">
           <li [ngClass]="{active: activeRoute('gestion-usuarios')}"><a [routerLink]="['/usuarios/gestion']">Gestión</a></li>
         </ul>

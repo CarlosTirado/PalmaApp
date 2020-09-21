@@ -1,7 +1,9 @@
 ﻿using Aplication.Cultivos.ModelView;
 using Aplication.Lotes.ModelView;
 using Domain.Base;
+using Domain.Lotes;
 using MediatR;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

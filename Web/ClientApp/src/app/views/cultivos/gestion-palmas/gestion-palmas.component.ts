@@ -1,103 +1,101 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Cultivo } from '../Models/cultivo';
-import { LoteService } from '../Services/Lote.service';
-import { Lote } from '../Models/lote';
-import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { Location } from '@angular/common';
+import { Palma } from '../Models/palma';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PalmaService } from '../Services/Palma.service';
+import { Lote } from '../Models/lote';
 
 @Component({
-  selector: 'app-gestion-lotes',
-  templateUrl: './gestion-lotes.component.html',
-  styleUrls: ['./gestion-lotes.component.css']
+	selector: 'app-gestion-palmas',
+	templateUrl: './gestion-palmas.component.html',
+	styleUrls: ['./gestion-palmas.component.css']
 })
-export class GestionLotesComponent implements OnInit {
+export class GestionPalmasComponent implements OnInit {
 
 	public cultivoId:number;
-	public cultivo:Cultivo;
-	
-	public lotes:Lote[];
 	public loteId:number;
-	public loteForm:FormGroup;
+	public lote:Lote;
+	
+	public palmas:Palma[];
+	public palmaForm:FormGroup;
 	public visualizarFormulario: boolean = false;
-	public GuardarLote = this.RegistrarLote;
+	public GuardarPalma = this.RegistrarPalma;
 
 	public accion:string;
-  	private loteEstado:string;
+
+  	private palmaId:number;
+  	private palmaEstado:string;
   
 	constructor(
 		private _formBuilder: FormBuilder,
 		private _routerActivated: ActivatedRoute,
 		private _router:Router,
 		private _location: Location,
-		private _loteService: LoteService
+		private _palmaService: PalmaService
 	) { }
 
 	ngOnInit() {
 		this.cultivoId = Number(this._routerActivated.snapshot.paramMap.get('cultivoId'));
-		if(isNaN(this.cultivoId) || !this.cultivoId){
-			this.ShowMessage('error', "Para realizar la gestión de lotes debe enviar un cultivo", "Ocurrió un Error");
+		this.loteId = Number(this._routerActivated.snapshot.paramMap.get('loteId'));
+		if(isNaN(this.cultivoId) || !this.cultivoId || isNaN(this.loteId) || !this.loteId){
+			this.ShowMessage('error', "Para realizar la gestión palmas debe enviar un lote", "Ocurrió un Error");
 			this.irAtras();
 		}
-		this.lotes = new Array<Lote>();
-		this.ConsultarCultivo();
-		this.loteForm = this.InicializarFormulario();
+		this.palmas = new Array<Palma>();
+		//this.ConsultarCultivo();
+		this.palmaForm = this.InicializarFormulario();
 	}
 
 	public irAtras(){
 		this._location.back();
 	}
 
-	public IrAGestionPalmas(lote:Lote){
-		this._router.navigate([`/cultivos/${this.cultivoId}/Lotes/${lote.id}/Palmas`]);
-	}	
-
 	private ConsultarCultivo(){
-		this._loteService.ConsultarCultivoPorId(this.cultivoId)
+		this._palmaService.ConsultarCultivoPorId(this.cultivoId)
 		.subscribe(response =>{
 			if(!response) return;
-			this.cultivo = response;
-			this.ConsultarLotes();
+			this.lote = response;
+			this.ConsultarPalmas();
 		})
 	}
   
-  	private ConsultarLotes(){
-		this._loteService.ConsultarLotesDeUnCultivo(this.cultivo.id)
+  	private ConsultarPalmas(){
+		this._palmaService.ConsultarPalmasDeUnLote(this.lote.id)
 		.subscribe(response =>{
 			if(!response) return;
-			this.lotes = response;
-			this.loteForm.reset({cultivoId: this.cultivoId});
+			this.palmas = response;
+			this.palmaForm.reset({loteId: this.loteId});
 			this.visualizarFormulario = false;
 		})
   	}
 
 	public AbrirModalNuevoLote(){
 		this.visualizarFormulario = true;
-		this.loteForm.reset({cultivoId: this.cultivoId});
+		this.palmaForm.reset({cultivoId: this.cultivoId});
 		this.accion = 'Registrar';
-		this.GuardarLote = this.RegistrarLote;
+		this.GuardarPalma = this.RegistrarPalma;
 	}
-	public AbrirModalEditarLote(lote:Lote){
+	public AbrirModalEditarLote(palma:Palma){
 		this.visualizarFormulario = true;
 		this.accion = 'Editar';
-		this.loteId = lote.id;
-		this.loteEstado = lote.estado;
-		this.loteForm.patchValue({
-			cultivoId: lote.cultivoId,
-			nombre: lote.nombre,
-			numeroHectareas: lote.numeroHectareas
+		this.palmaId = palma.id;
+		this.palmaEstado = palma.estado;
+		this.palmaForm.patchValue({
+			loteId: palma.loteId,
+			nombre: palma.nombre,
 		});
-		this.GuardarLote = this.EditarLote;
+		this.GuardarPalma = this.EditarLote;
 	}
 
-	private RegistrarLote(){
+	private RegistrarPalma(){
 		this.ConfirmMessage('question','','',(result)=>{
-			const loteForm = this.loteForm.value;
-			this._loteService.RegistrarLote(loteForm)
+			const loteForm = this.palmaForm.value;
+			this._palmaService.RegistrarLote(loteForm)
 			.subscribe(response =>{
 				if(!response) return;
-				this.ConsultarLotes();
+				this.ConsultarPalmas();
 				this.ShowMessage('success',response.mensaje);
 			})			
 		});
@@ -105,11 +103,11 @@ export class GestionLotesComponent implements OnInit {
 
 	private EditarLote(){
 		this.ConfirmMessage('question','','',(result)=>{
-			const loteForm = this.loteForm.value;
-			this._loteService.EditarLote(this.cultivoId, this.loteId, loteForm.nombre, loteForm.numeroHectareas, this.loteEstado)
+			const loteForm = this.palmaForm.value;
+			this._palmaService.EditarLote(this.cultivoId, this.loteId, loteForm.nombre, loteForm.numeroHectareas, this.palmaEstado)
 			.subscribe(response =>{
 				if(!response) return;
-				this.ConsultarLotes();
+				this.ConsultarPalmas();
 				this.ShowMessage('success',response.mensaje);
 			})
 		})
@@ -117,11 +115,11 @@ export class GestionLotesComponent implements OnInit {
 
 	public EliminarLote(lote:Lote){
 		this.ConfirmMessage('warning','','',(result)=>{
-			this._loteService.InactivarLote(this.cultivoId, lote.id, lote.nombre, lote.numeroHectareas)
+			this._palmaService.InactivarLote(this.cultivoId, lote.id, lote.nombre, lote.numeroHectareas)
 			.subscribe(response =>{
 				if(!response) return;
 				this.ShowMessage('success',response.mensaje);
-				this.ConsultarLotes();
+				this.ConsultarPalmas();
 			})
 		})
 	}
