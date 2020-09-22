@@ -15,6 +15,8 @@ namespace Data.Lotes.Mappers
         {
             builder.ToTable(typeof(Lote).Name, PalmAppContext.DEFAULT_SCHEMA);
             builder.HasKey(t => t.Id);
+
+            builder.HasOne(t => t.Cultivo).WithMany(x => x.Lotes).HasForeignKey(x => x.CultivoId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 } 
