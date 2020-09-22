@@ -7,9 +7,9 @@ import { BlankLayoutComponent } from "./components/common/layouts/blankLayout.co
 import { BasicLayoutComponent } from "./components/common/layouts/basicLayout.component";
 import { AuthorizeGuard } from "../api-authorization/authorize.guard";
 import { GestionCultivosComponent } from "./views/cultivos/gestion-cultivos/gestion-cultivos.component";
-import { RegistroCultivoComponent } from "./views/cultivos/registro-cultivo/registro-cultivo.component";
 import { GestionUsuariosComponent } from "./usuarios/gestion-usuarios/gestion-usuarios.component";
 import { GestionLotesComponent } from "./views/cultivos/gestion-lotes/gestion-lotes.component";
+import { GestionPalmasComponent } from "./views/cultivos/gestion-palmas/gestion-palmas.component";
 
 export const ROUTES: Routes = [
   // Main redirect
@@ -21,6 +21,7 @@ export const ROUTES: Routes = [
     children: [
       { path: 'gestion', component: GestionCultivosComponent, canActivate: [AuthorizeGuard] },
       { path: ':cultivoId/Lotes', component: GestionLotesComponent, canActivate: [AuthorizeGuard] },
+      { path: ':cultivoId/Lotes/:loteId/Palmas', component: GestionPalmasComponent, canActivate: [AuthorizeGuard] },
     ]
   },
   // Ruta para la gestion de usuario
