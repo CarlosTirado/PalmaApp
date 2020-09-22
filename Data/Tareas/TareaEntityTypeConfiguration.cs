@@ -1,5 +1,5 @@
 using Data.Context;
-using Domain.Lotes;
+using Domain.Palmas;
 using Domain.DatosBasicos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

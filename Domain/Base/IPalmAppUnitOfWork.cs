@@ -1,9 +1,8 @@
 ﻿using Domain.Cultivos;
 using Domain.DatosBasicos;
-using Domain.Lotes;
+using Domain.Palmas;
+using Domain.Tareas;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Domain.Base
 {
@@ -13,5 +12,7 @@ namespace Domain.Base
         int Commit();
         ITerceroRepository TerceroRepository { get; }
         ICultivoRepository CultivoRepository { get; }
+        ITareaRepository TareaRepository { get; }
+        IPalmaRepository PalmaRepository { get; }
     }
 }

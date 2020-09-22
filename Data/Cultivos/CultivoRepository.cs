@@ -29,7 +29,7 @@ namespace Data.Cultivos
         public Cultivo Get(long id)
         {
             var Cultivo = _context.Cultivos
-                .Include(t => t.Lotes)
+                .Include(t => t.Lotes).ThenInclude(t=> t.Palmas)
                 .FirstOrDefault(t =>
                     t.Estado == EstadoGeneralEnumeration.Activo.Id &&
                     t.Id == id);

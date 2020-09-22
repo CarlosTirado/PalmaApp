@@ -1,11 +1,13 @@
 ﻿using Data.Cultivos.Mappers;
 using Data.DatosBasicos.Mappers;
 using Data.Lotes.Mappers;
+using Data.Palmas.Mappers;
 using Data.Tareas;
 using Data.Tareas.Mappers;
 using Domain.Cultivos;
 using Domain.DatosBasicos;
 using Domain.Lotes;
+using Domain.Palmas;
 using Domain.Tareas;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +27,7 @@ namespace Data.Context
         public DbSet<Tercero> Terceros { get; set; }
         public DbSet<Cultivo> Cultivos { get; set; }
         public DbSet<Lote> Lotes { get; set; }
+        public DbSet<Palma> Palmas { get; set; }
         public DbSet<Tarea> Tareas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,6 +35,7 @@ namespace Data.Context
             modelBuilder.ApplyConfiguration(new TerceroEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new CultivoEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new LoteEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new PalmaEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new TareaEntityTypeConfiguration());
         }
     }

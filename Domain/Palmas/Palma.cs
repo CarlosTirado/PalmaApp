@@ -1,0 +1,50 @@
+﻿using Domain.Cultivos;
+using Domain.DatosBasicos.EstadosGenerales;
+using Domain.Lotes;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Domain.Palmas
+{
+    public class Palma
+    {
+        public Palma(
+            int altura,
+            string descripcion,
+            DateTime fechaSiembra)
+        {
+            Altura = altura;
+            Descripcion = descripcion;
+            FechaSiembra = fechaSiembra;
+            Estado = EstadoGeneralEnumeration.Activo.Id;
+        }
+
+        public long Id { get; private set; }
+        public string Consecutivo { get; private set; }
+        public int Altura { get; private set; }
+        public string Descripcion { get; private set; }
+        public DateTime FechaSiembra { get; private set; }
+        public string Estado { get; set; }
+        public long LoteId { get; private set; }
+        public virtual Lote Lote { get; private set; }
+
+        public void Editar(
+            int altura, 
+            string descripcion, 
+            DateTime fechaSiembra,
+            string estado)
+        {
+            Altura = altura;
+            Descripcion = descripcion;
+            FechaSiembra = fechaSiembra;
+            Estado = estado;
+        }
+
+        public void AsignarConsecutivo(
+           string consecutivo)
+        {
+            Consecutivo = consecutivo;
+        }
+    }
+}

@@ -2,10 +2,14 @@
 using Data.Cultivos;
 using Data.DatosBasicos.Terceros;
 using Data.Lotes;
+using Data.Palmas;
+using Data.Tareas;
 using Domain.Base;
 using Domain.Cultivos;
 using Domain.DatosBasicos;
 using Domain.Lotes;
+using Domain.Palmas;
+using Domain.Tareas;
 using System;
 
 namespace Data.Base
@@ -33,5 +37,11 @@ namespace Data.Base
 
         private ICultivoRepository _cultivoRepository;
         public ICultivoRepository CultivoRepository { get { return _cultivoRepository ?? (_cultivoRepository = new CultivoRepository(_context)); } }
+
+        private ITareaRepository _tareaRepository;
+        public ITareaRepository TareaRepository { get { return _tareaRepository ?? (_tareaRepository = new TareaRepository(_context)); } }
+
+        private IPalmaRepository _palmaRepository;
+        public IPalmaRepository PalmaRepository { get { return _palmaRepository ?? (_palmaRepository = new PalmaRepository(_context)); } }
     }
 }
