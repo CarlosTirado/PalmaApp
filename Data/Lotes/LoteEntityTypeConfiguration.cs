@@ -1,11 +1,12 @@
 ﻿using Data.Context;
-using Domain.Lotes;
+using Domain.Tareas;
 using Domain.DatosBasicos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Domain.Lotes;
 
 namespace Data.Lotes.Mappers
 {
