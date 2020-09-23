@@ -4,8 +4,9 @@ import { Location } from '@angular/common';
 import { Palma } from '../Models/palma';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PalmaService } from '../Services/Palma.service';
+import { GestionPalmaRequest, PalmaService } from '../Services/Palma.service';
 import { Lote } from '../Models/lote';
+import { Cultivo } from '../Models/cultivo';
 
 @Component({
 	selector: 'app-gestion-palmas',
@@ -15,6 +16,8 @@ import { Lote } from '../Models/lote';
 export class GestionPalmasComponent implements OnInit {
 
 	public cultivoId:number;
+	public cultivo:Cultivo;
+	
 	public loteId:number;
 	public lote:Lote;
 	
@@ -44,7 +47,9 @@ export class GestionPalmasComponent implements OnInit {
 			this.irAtras();
 		}
 		this.palmas = new Array<Palma>();
-		//this.ConsultarCultivo();
+		this.ConsultarCultivo();
+		this.ConsultarLote();
+
 		this.palmaForm = this.InicializarFormulario();
 	}
 
@@ -56,43 +61,67 @@ export class GestionPalmasComponent implements OnInit {
 		this._palmaService.ConsultarCultivoPorId(this.cultivoId)
 		.subscribe(response =>{
 			if(!response) return;
+			this.cultivo = response;
+		})
+	}
+  
+	private ConsultarLote(){
+		this._palmaService.ConsultarLotePorId(this.loteId)
+		.subscribe(response =>{
+			if(!response) return;
 			this.lote = response;
 			this.ConsultarPalmas();
 		})
 	}
-  
+	  
   	private ConsultarPalmas(){
 		this._palmaService.ConsultarPalmasDeUnLote(this.lote.id)
 		.subscribe(response =>{
 			if(!response) return;
 			this.palmas = response;
-			this.palmaForm.reset({loteId: this.loteId});
+			this.palmaForm.reset();
 			this.visualizarFormulario = false;
 		})
   	}
 
-	public AbrirModalNuevoLote(){
+	public AbrirModalNuevaPalma(){
 		this.visualizarFormulario = true;
-		this.palmaForm.reset({cultivoId: this.cultivoId});
+		this.palmaForm.reset();
 		this.accion = 'Registrar';
 		this.GuardarPalma = this.RegistrarPalma;
 	}
-	public AbrirModalEditarLote(palma:Palma){
+	public AbrirModalEditarPalma(palma:Palma){
 		this.visualizarFormulario = true;
 		this.accion = 'Editar';
 		this.palmaId = palma.id;
 		this.palmaEstado = palma.estado;
 		this.palmaForm.patchValue({
-			loteId: palma.loteId,
-			nombre: palma.nombre,
+			altura: palma.altura,
+			descripcion: palma.descripcion,
+			fechaSiembra: this.formatFecha(palma.fechaSiembra)
 		});
-		this.GuardarPalma = this.EditarLote;
+		this.GuardarPalma = this.EditarPalma;
+	}
+	private formatFecha(fecha:Date):string{
+		const fechaString:string = fecha.toString().split('T')[0];
+		return fechaString;
 	}
 
+	private ArmarRequest():GestionPalmaRequest{
+		const palmaForm = this.palmaForm.value;
+		return {
+			cultivoId: this.cultivoId,
+			loteId: this.loteId,
+			altura: palmaForm.altura,
+			descripcion: palmaForm.descripcion,
+			fechaSiembra: palmaForm.fechaSiembra,
+			palmaId: this.palmaId,
+			estado: this.palmaEstado,
+		}
+	}
 	private RegistrarPalma(){
 		this.ConfirmMessage('question','','',(result)=>{
-			const loteForm = this.palmaForm.value;
-			this._palmaService.RegistrarLote(loteForm)
+			this._palmaService.RegistrarPalma(this.ArmarRequest())
 			.subscribe(response =>{
 				if(!response) return;
 				this.ConsultarPalmas();
@@ -101,10 +130,10 @@ export class GestionPalmasComponent implements OnInit {
 		});
 	}
 
-	private EditarLote(){
+	private EditarPalma(){
 		this.ConfirmMessage('question','','',(result)=>{
 			const loteForm = this.palmaForm.value;
-			this._palmaService.EditarLote(this.cultivoId, this.loteId, loteForm.nombre, loteForm.numeroHectareas, this.palmaEstado)
+			this._palmaService.EditarPalma(this.ArmarRequest())
 			.subscribe(response =>{
 				if(!response) return;
 				this.ConsultarPalmas();
@@ -113,9 +142,15 @@ export class GestionPalmasComponent implements OnInit {
 		})
 	}
 
-	public EliminarLote(lote:Lote){
+	public EliminarPalma(palma:Palma){
 		this.ConfirmMessage('warning','','',(result)=>{
-			this._palmaService.InactivarLote(this.cultivoId, lote.id, lote.nombre, lote.numeroHectareas)
+			let eliminarPalmaRequest: GestionPalmaRequest ={
+				altura: palma.altura,
+				descripcion: palma.descripcion,
+				fechaSiembra: palma.fechaSiembra,
+				palmaId: palma.id
+			};
+			this._palmaService.InactivarPalma(eliminarPalmaRequest)
 			.subscribe(response =>{
 				if(!response) return;
 				this.ShowMessage('success',response.mensaje);
@@ -126,9 +161,9 @@ export class GestionPalmasComponent implements OnInit {
 
 	private InicializarFormulario():FormGroup{
 		return this._formBuilder.group({
-			cultivoId: [this.cultivoId, [Validators.required]],
-			nombre: [undefined, [Validators.required]],
-			numeroHectareas: [undefined, [Validators.required]],
+			altura:[0, [Validators.required]],
+			descripcion:[undefined, [Validators.required]],
+			fechaSiembra:[undefined, [Validators.required]],
 		})
 	}
 
