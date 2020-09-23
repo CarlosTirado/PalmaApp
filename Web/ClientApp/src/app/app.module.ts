@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
@@ -18,7 +18,9 @@ import { ApiAuthorizationModule } from '../api-authorization/api-authorization.m
 import { CultivosModule } from './views/cultivos/cultivos.module';
 import { TareasModule } from './views/cultivos/tareas.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
-
+import { registerLocaleData } from '@angular/common';
+import localeEsCo from '@angular/common/locales/es-CO';
+registerLocaleData(localeEsCo);
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { UsuariosModule } from './usuarios/usuarios.module';
   ],
   providers: [
     { provide: LocationStrategy, useClass: PathLocationStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'es-CO' },
   ],
   bootstrap: [AppComponent]
 })
