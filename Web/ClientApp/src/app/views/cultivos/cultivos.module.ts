@@ -5,13 +5,15 @@ import { RegistroCultivoComponent } from './registro-cultivo/registro-cultivo.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GestionLotesComponent } from './gestion-lotes/gestion-lotes.component';
 import { GestionPalmasComponent } from './gestion-palmas/gestion-palmas.component';
+import { GestionTareasComponent } from './gestion-tareas/gestion-tareas.component';
 
 @NgModule({
   declarations: [
     GestionCultivosComponent,
     RegistroCultivoComponent,
     GestionLotesComponent,
-    GestionPalmasComponent
+    GestionPalmasComponent,
+    GestionTareasComponent
   ],
   imports: [
     CommonModule,

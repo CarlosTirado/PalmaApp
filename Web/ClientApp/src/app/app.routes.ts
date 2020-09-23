@@ -10,6 +10,7 @@ import { GestionCultivosComponent } from "./views/cultivos/gestion-cultivos/gest
 import { GestionUsuariosComponent } from "./usuarios/gestion-usuarios/gestion-usuarios.component";
 import { GestionLotesComponent } from "./views/cultivos/gestion-lotes/gestion-lotes.component";
 import { GestionPalmasComponent } from "./views/cultivos/gestion-palmas/gestion-palmas.component";
+import { GestionTareasComponent } from "./views/cultivos/gestion-tareas/gestion-tareas.component";
 
 export const ROUTES: Routes = [
   // Main redirect
@@ -29,6 +30,14 @@ export const ROUTES: Routes = [
     path: 'usuarios', component: BasicLayoutComponent,
     children: [
       { path: 'gestion', component: GestionUsuariosComponent, canActivate: [AuthorizeGuard] },
+    ]
+  },
+  // Ruta para la gestion de tareas
+  {
+    path: 'tareas', component: BasicLayoutComponent,
+    children: [
+      { path: 'programar', component: GestionTareasComponent, canActivate: [AuthorizeGuard] },
+      { path: 'crear', component: GestionTareasComponent, canActivate: [AuthorizeGuard] },
     ]
   },
   {
