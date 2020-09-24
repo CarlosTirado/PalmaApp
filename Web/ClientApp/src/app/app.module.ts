@@ -16,7 +16,7 @@ import { LayoutsModule } from "./components/common/layouts/layouts.module";
 import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor';
 import { ApiAuthorizationModule } from '../api-authorization/api-authorization.module';
 import { CultivosModule } from './views/cultivos/cultivos.module';
-import { TareasModule } from './views/cultivos/tareas.module';
+//import { TareasModule } from './views/cultivos/cultivos.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { registerLocaleData } from '@angular/common';
 import localeEsCo from '@angular/common/locales/es-CO';

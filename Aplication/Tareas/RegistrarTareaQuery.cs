@@ -1,17 +1,16 @@
-﻿using Domain.Base;
-using Domain.Tareas;
+﻿using Aplication.Tareas.ModelView;
+using Domain.Base;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Domain.Tareas;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Aplication.Tareas
 {
+
     public class RegistrarTareaQuery : IRequestHandler<RegistrarTareaRequest, RegistrarTareaResponse>
     {
+        
         private readonly IPalmAppUnitOfWork _palmAppUnitOfWork;
         public RegistrarTareaQuery(
             IPalmAppUnitOfWork palmAppUnitOfWork)
@@ -21,7 +20,7 @@ namespace Aplication.Tareas
 
         public Task<RegistrarTareaResponse> Handle(RegistrarTareaRequest request, CancellationToken cancellationToken)
         {
-            var tarea = new Tarea(request.Nombre, request.Descripcion, request.Estado);
+            var tarea = new Tarea(request.Nombre, request.Descripcion);
             _palmAppUnitOfWork.TareaRepository.Add(tarea);
             _palmAppUnitOfWork.Commit();
             return Task.FromResult(new RegistrarTareaResponse(tarea.Id));
@@ -29,11 +28,15 @@ namespace Aplication.Tareas
     }
     public class RegistrarTareaRequest : IRequest<RegistrarTareaResponse>
     {
-        public RegistrarTareaRequest() { }
-        public long Id { get; private set; }
-        public string Nombre { get; private set; }
-        public string Descripcion { get; private set; }
-        public string Estado { get; private set; }
+        public RegistrarTareaRequest(){}
+
+        public RegistrarTareaRequest(string nombre, string descripcion)
+        {
+            Nombre = nombre;
+            Descripcion = descripcion;
+        }
+        public string Nombre { get;  set; }
+        public string Descripcion { get;  set; }
     }
     public class RegistrarTareaResponse
     {

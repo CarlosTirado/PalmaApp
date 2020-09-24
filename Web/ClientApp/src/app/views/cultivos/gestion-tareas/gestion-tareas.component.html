@@ -1,1 +1,79 @@
-<p>gestion-tareas works!</p>
+<div class="panel">
+  <div class="panel-heading h5 text-right">
+    <span class="pull-left"><i class="fa fa-tree m-r-xs"></i> Tareas</span>
+    <button class="btn btn-primary" (click)='AbrirModalNuevaTarea()'>Nueva Tarea <i class="fa fa-plus m-l-xs"></i></button>
+  </div>
+  <div class="panel-body">
+    <div class="panel panel-default" *ngIf='visualizarFormulario'>
+      <div class="panel-heading text-right">
+        <span class="pull-left">{{accion}} Tarea</span>
+        <i class="fa fa-times" (click)='visualizarFormulario = false' style="cursor:pointer"></i>
+      </div>
+      <div class="panel-body">
+        <form [formGroup]='tareaForm'>
+          <div class="row p-w-md">
+            <div class="col-sm-12 col-md-5">
+              <label>Nombre</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-address-card"></i>
+                </div>
+                <input type="text" class="form-control" formControlName='nombre'>
+              </div>
+              <small class="text-danger" *ngIf='tareaForm.get("nombre").hasError("required") && (tareaForm.get("nombre").dirty || tareaForm.get("nombre").touched)'>
+                El nombre de la tarea es obligatoria
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-5">
+              <label>Descripción</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-address-card"></i>
+                </div>
+                <input type="text" class="form-control" formControlName='descripcion'>
+              </div>
+              <small class="text-danger" *ngIf='tareaForm.get("descripcion").hasError("required") && (tareaForm.get("descripcion").dirty || tareaForm.get("descripcion").touched)'>
+                El nombre de la tarea es obligatoria
+              </small>
+            </div>
+            
+            <div class="col-sm-12 col-md-2">
+              <button class="btn btn-primary m-t-md" (click)='GuardarTarea()' [disabled]='tareaForm.invalid'> Guardar <i class="m-l-xs fa fa-save"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="table-responsive p-w-sm">
+      <table class="table table-bordered table-striped m-b-xs">
+        <thead>
+          <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Descripción</th>
+            <th class="text-center">Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let tarea of tareas; index as i'>
+            <td class="text-center">{{i+1}}</td>
+            <td>{{tarea.nombre}}</td>
+            <td>{{tarea.descripcion}}</td>
+            <td class="text-center"> <span class="label" [ngClass]='{"label-primary": tarea.estado == "AC", "label-danger": tarea.estado != "AC"}'>{{tarea.estado == 'AC' ? 'ACTIVO': 'INACTIVO'}}</span></td>
+            <td style="width: 165px;" class="text-center">
+              <button class="btn btn-default btn-xs" (click)='AbrirModalEditarTarea(tarea)'>Editar</button>
+              <button class="btn btn-default btn-xs" (click)='EliminarTarea(tarea)'>Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5" class="text-center" *ngIf='tareas.length <= 0'><i>No se encontraron tareas registradas en el sistema</i></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+

@@ -13,16 +13,16 @@ namespace Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TareasController : ControllerBase
+    public class TareaController : ControllerBase
     {
 
         private readonly IMediator _mediator;
-        public TareasController(IMediator mediator)
+        public TareaController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        // GET: api/<TareasController>
+        // GET: api/<TareaController>
         [HttpGet]
         public async Task<ActionResult<List<TareaModelView>>> Gets()
         {
@@ -30,31 +30,30 @@ namespace Web.Controllers
             return Ok(response.Tareas);
         }
 
-        // GET api/<TareasController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET api/<TareaController>/5
+        [HttpGet("{Tareaid}")]
+        public async Task<ActionResult<TareaModelView>> Gets(long tareaId)
         {
-            return "value";
+            var response = await _mediator.Send(new ConsultarTareaPorIdRequest { TareaId = tareaId });
+            return Ok(response.Tarea);
         }
 
-        // POST api/<TareasController>
-        [HttpPost]
+        // POST api/<TareaController>
+        [HttpPost("")]
         public async Task<ActionResult<RegistrarTareaResponse>> Post(RegistrarTareaRequest request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);
         }
 
-        // PUT api/<TareasController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT api/<TareaController>/5
+       
+        [HttpPut("")]
+        public async Task<ActionResult<EditarTareaResponse>> Put(EditarTareaRequest request)
         {
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
 
-        // DELETE api/<TareasController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
