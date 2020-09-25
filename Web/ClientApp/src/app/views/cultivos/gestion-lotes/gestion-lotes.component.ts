@@ -49,7 +49,7 @@ export class GestionLotesComponent implements OnInit {
 		this._location.back();
 	}
 
-	public IrAGestionPalmas(lote:Lote){
+  public IrAGestionPalmas(lote: Lote) {
 		this._router.navigate([`/cultivos/${this.cultivoId}/Lotes/${lote.id}/Palmas`]);
 	}	
 

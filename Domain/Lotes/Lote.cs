@@ -41,11 +41,11 @@ namespace Domain.Lotes
             if (Palmas.Any())
             {
                 var ultimoConsecutivo = Palmas.OrderByDescending(t => t.Id).FirstOrDefault().Consecutivo;
-                palma.AsignarConsecutivo((int.Parse(ultimoConsecutivo) + 1).ToString());
+                palma.AsignarConsecutivo((int.Parse(ultimoConsecutivo) + 1).ToString().PadLeft(4, '0'));
             }
             else
             {
-                palma.AsignarConsecutivo("1");
+                palma.AsignarConsecutivo(("1").PadLeft(4, '0'));
             }
 
             _palmas.Add(palma);
