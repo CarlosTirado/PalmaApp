@@ -9,7 +9,7 @@ namespace Aplication.Lotes.ModelView
         public long Id { get; set; }
         public long CultivoId { get; set; }
         public string Nombre { get; set; }
-        public int NumeroHectareas { get; set; }
+        public decimal NumeroHectareas { get; set; }
         public string Estado { get; set; }
     }
 }

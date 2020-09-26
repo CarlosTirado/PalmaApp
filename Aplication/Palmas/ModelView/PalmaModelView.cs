@@ -9,7 +9,7 @@ namespace Aplication.Palmas.ModelView
     {
         public long Id { get;  set; }
         public string Consecutivo { get;  set; }
-        public int Altura { get;  set; }
+        public decimal Altura { get;  set; }
         public string Descripcion { get;  set; }
         public DateTime FechaSiembra { get;  set; }
         public string Estado { get; set; }

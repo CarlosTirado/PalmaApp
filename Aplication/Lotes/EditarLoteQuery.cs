@@ -45,7 +45,7 @@ namespace Aplication.Lotes
         public long CultivoId { get; set; }
         public long LoteId { get; set; }
         public string Nombre { get; set; }
-        public int NumeroHectareas { get; set; }
+        public decimal NumeroHectareas { get; set; }
         public string Estado { get; set; }
     }
     public class EditarLoteResponse
