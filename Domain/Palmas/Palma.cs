@@ -10,7 +10,7 @@ namespace Domain.Palmas
     public class Palma
     {
         public Palma(
-            int altura,
+            decimal altura,
             string descripcion,
             DateTime fechaSiembra)
         {
@@ -22,7 +22,7 @@ namespace Domain.Palmas
 
         public long Id { get; private set; }
         public string Consecutivo { get; private set; }
-        public int Altura { get; private set; }
+        public decimal Altura { get; private set; }
         public string Descripcion { get; private set; }
         public DateTime FechaSiembra { get; private set; }
         public string Estado { get; set; }
@@ -30,7 +30,7 @@ namespace Domain.Palmas
         public virtual Lote Lote { get; private set; }
 
         public void Editar(
-            int altura, 
+            decimal altura, 
             string descripcion, 
             DateTime fechaSiembra,
             string estado)

@@ -48,7 +48,7 @@ namespace Aplication.Palmas
 
         public long CultivoId { get; set; }
         public long LoteId { get; set; }
-        public int Altura { get; set; }
+        public decimal Altura { get; set; }
         public string Descripcion { get; set; }
         public DateTime FechaSiembra { get; set; }
     }
