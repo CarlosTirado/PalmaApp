@@ -68,7 +68,7 @@
                             <td class="text-center">{{(lote.numeroHectareas | number)}}</td>
                             <td class="text-center"> <span class="label" [ngClass]='{"label-primary": lote.estado == "AC", "label-danger": lote.estado != "AC"}'>{{lote.estado == 'AC' ? 'ACTIVO': 'INACTIVO'}}</span></td>
                             <td style="width: 175px;" class="text-center">
-                                <button class="btn btn-default btn-xs" (click)='IrAGestionPalmas(cultivo)'>Palmas</button>
+                                <button class="btn btn-default btn-xs" (click)='IrAGestionPalmas(lote)'>Palmas</button>
                                 <button class="btn btn-default btn-xs" (click)='AbrirModalEditarLote(lote)'>Editar</button>
                                 <button class="btn btn-default btn-xs" (click)='EliminarLote(lote)'>Eliminar</button>
                             </td>

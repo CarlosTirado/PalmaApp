@@ -2,7 +2,6 @@
 using Domain.Tareas;
 using Domain.DatosBasicos;
 using Domain.DatosBasicos.EstadosGenerales;
-using Domain.Tareas;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

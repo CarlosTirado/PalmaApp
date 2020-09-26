@@ -45,6 +45,14 @@
         </ul>
       </li>
 
+      <li *ngIf="estaAutenticado" [ngClass]="{active: activeRoute('tareas')}">
+        <a><i class="fa fa-tasks"></i> <span class="nav-label">Tareas</span> <span class="fa arrow"></span> </a>
+        <ul class="nav nav-second-level collapse" [ngClass]="{in: activeRoute('tareas')}">
+          <li [ngClass]="{active: activeRoute('gestion-tareas')}"><a [routerLink]="['/tareas/crear']">Crear</a></li>
+          <li [ngClass]="{active: activeRoute('gestion-tareas')}"><a [routerLink]="['/tareas/programar']">Programar</a></li>
+        </ul>
+      </li>
+
       <li *ngIf="!estaAutenticado" [ngClass]="{active: activeRoute('login')}">
         <a [routerLink]="['/authentication/login']"><i class="fa fa-sign-in"></i> <span class="nav-label">Login</span></a>
       </li>
