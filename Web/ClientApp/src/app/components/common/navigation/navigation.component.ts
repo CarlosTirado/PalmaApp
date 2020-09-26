@@ -78,4 +78,8 @@ export class NavigationComponent {
     });
   }
 
+  goToLogout(): void {
+    this.router.navigate(['/authentication/logout'], { state: { local: true } });
+  }
+
 }
