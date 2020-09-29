@@ -17,6 +17,7 @@ using MediatR;
 using Data.Base;
 using Domain.Base;
 using System;
+using Web.Controllers;
 
 namespace TestCore5
 {
@@ -32,6 +33,12 @@ namespace TestCore5
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc()
+                .AddMvcOptions(options =>
+                {
+                    options.Filters.Add(new ValidateModelAttribute());
+                });
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("PalmAppContext")));
