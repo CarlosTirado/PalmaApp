@@ -36,7 +36,7 @@ export class GestionLotesComponent implements OnInit {
 
 	ngOnInit() {
 		this.cultivoId = Number(this._routerActivated.snapshot.paramMap.get('cultivoId'));
-		if(isNaN(this.cultivoId) || !this.cultivoId){
+		if(isNaN(this.cultivoId) || this.cultivoId == null){
 			this.ShowMessage('error', "Para realizar la gestión de lotes debe enviar un cultivo", "Ocurrió un Error");
 			this.irAtras();
 		}

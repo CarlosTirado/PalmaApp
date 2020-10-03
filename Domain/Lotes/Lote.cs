@@ -10,15 +10,6 @@ namespace Domain.Lotes
 {
     public class Lote
     {
-        public Lote(long cultivoId, string nombre, decimal numeroHectareas)
-        {
-            CultivoId = cultivoId;
-            Nombre = nombre;
-            NumeroHectareas = numeroHectareas;
-            Estado = EstadoGeneralEnumeration.Activo.Id;
-            _palmas = new List<Palma>();
-        }
-
         public long Id { get; private set; }
         public string Nombre { get; private set; }
         public decimal NumeroHectareas { get; private set; }
@@ -28,6 +19,15 @@ namespace Domain.Lotes
 
         private readonly List<Palma> _palmas;
         public IReadOnlyCollection<Palma> Palmas => _palmas.AsReadOnly();
+
+        public Lote(long cultivoId, string nombre, decimal numeroHectareas)
+        {
+            CultivoId = cultivoId;
+            Nombre = nombre;
+            NumeroHectareas = numeroHectareas;
+            Estado = EstadoGeneralEnumeration.Activo.Id;
+            _palmas = new List<Palma>();
+        }
 
         public void Editar(string nombre, decimal numeroHectareas, string estado)
         {

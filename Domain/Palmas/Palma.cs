@@ -9,6 +9,15 @@ namespace Domain.Palmas
 {
     public class Palma
     {
+        public long Id { get; private set; }
+        public string Consecutivo { get; private set; }
+        public decimal Altura { get; private set; }
+        public string Descripcion { get; private set; }
+        public DateTime FechaSiembra { get; private set; }
+        public string Estado { get; set; }
+        public long LoteId { get; private set; }
+        public virtual Lote Lote { get; private set; }
+
         public Palma(
             decimal altura,
             string descripcion,
@@ -19,15 +28,6 @@ namespace Domain.Palmas
             FechaSiembra = fechaSiembra;
             Estado = EstadoGeneralEnumeration.Activo.Id;
         }
-
-        public long Id { get; private set; }
-        public string Consecutivo { get; private set; }
-        public decimal Altura { get; private set; }
-        public string Descripcion { get; private set; }
-        public DateTime FechaSiembra { get; private set; }
-        public string Estado { get; set; }
-        public long LoteId { get; private set; }
-        public virtual Lote Lote { get; private set; }
 
         public void Editar(
             decimal altura, 

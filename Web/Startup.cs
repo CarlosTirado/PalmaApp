@@ -18,6 +18,7 @@ using Data.Base;
 using Domain.Base;
 using System;
 using Web.Controllers;
+using DataInFile.Base;
 
 namespace TestCore5
 {
@@ -83,7 +84,7 @@ namespace TestCore5
         {
             services.AddMediatR(AppDomain.CurrentDomain.Load("Aplication"));
 
-            services.AddScoped<IPalmAppUnitOfWork, PalmAppUnitOfWork>();
+            services.AddScoped<IPalmAppUnitOfWork, PalmAppInFileUnitOfWork>();
         }
 
 

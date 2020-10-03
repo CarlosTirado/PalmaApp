@@ -42,7 +42,7 @@ export class GestionPalmasComponent implements OnInit {
 	ngOnInit() {
 		this.cultivoId = Number(this._routerActivated.snapshot.paramMap.get('cultivoId'));
 		this.loteId = Number(this._routerActivated.snapshot.paramMap.get('loteId'));
-		if(isNaN(this.cultivoId) || !this.cultivoId || isNaN(this.loteId) || !this.loteId){
+		if(isNaN(this.cultivoId) || this.cultivoId == null || isNaN(this.loteId) || this.loteId == null){
 			this.ShowMessage('error', "Para realizar la gestión palmas debe enviar un lote", "Ocurrió un Error");
 			this.irAtras();
 		}

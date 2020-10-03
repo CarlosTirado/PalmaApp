@@ -7,6 +7,15 @@ namespace Domain.Cultivos
 {
     public class Cultivo
     {
+        public long Id { get; private set; }
+        public string Nombre { get; private set; }
+        public DateTime FechaSiembra { get; private set; }
+        public string Estado { get; private set; }
+
+        private readonly List<Lote> _lotes;
+        public IReadOnlyCollection<Lote> Lotes => _lotes.AsReadOnly();
+
+
         public Cultivo(string nombre, DateTime fechaSiembra)
         {
             Nombre = nombre;
@@ -15,14 +24,6 @@ namespace Domain.Cultivos
 
             _lotes = new List<Lote>();
         }
-
-        public long Id { get; private set; }
-        public string Nombre { get; private set; }
-        public DateTime FechaSiembra { get; private set; }
-        public string Estado { get; private set; }
-
-        private readonly List<Lote> _lotes;
-        public IReadOnlyCollection<Lote> Lotes => _lotes.AsReadOnly();
 
         public void Editar(string nombre, DateTime fechaSiembra, string estado)
         {

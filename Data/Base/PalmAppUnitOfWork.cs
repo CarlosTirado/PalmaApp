@@ -16,21 +16,18 @@ namespace Data.Base
 {
     public class PalmAppUnitOfWork : IPalmAppUnitOfWork
     {
-        protected PalmAppContext _context;
 
         public PalmAppUnitOfWork(PalmAppContext context)
         {
             _context = context;
         }
 
-        public DateTime DateNow => DateTime.Now;
-
-        public int Commit()
+        public void Commit()
         {
-            int numeroFilas = _context.SaveChanges();
-            return numeroFilas;
+            _context.SaveChanges();
         }
 
+        protected PalmAppContext _context;
 
         private ITerceroRepository _terceroRepository;
         public ITerceroRepository TerceroRepository { get { return _terceroRepository ?? (_terceroRepository = new TerceroRepository(_context)); } }

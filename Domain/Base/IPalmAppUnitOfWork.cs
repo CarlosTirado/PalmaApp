@@ -2,14 +2,12 @@
 using Domain.DatosBasicos;
 using Domain.Palmas;
 using Domain.Tareas;
-using System;
 
 namespace Domain.Base
 {
     public interface IPalmAppUnitOfWork
     {
-        DateTime DateNow { get; }
-        int Commit();
+        void Commit();
         ITerceroRepository TerceroRepository { get; }
         ICultivoRepository CultivoRepository { get; }
         ITareaRepository TareaRepository { get; }
