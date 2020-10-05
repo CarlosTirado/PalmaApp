@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Data.Base;
+using Domain.Base;
 
 namespace Data.Tareas
 {
@@ -18,20 +20,18 @@ namespace Data.Tareas
         {
             _context = context;
         }
-
         public ICollection<Tarea> Gets()
         {
-            var Tareas = _context.Tareas.Where(t => t.Estado == EstadoGeneralEnumeration.Activo.Id).ToList();
-            return Tareas;
+            return _context.Tareas.ToList();
+        }
+        public ICollection<Tarea> Gets(ISpecification<Tarea> especificacion)
+        {
+            return SpecificationEvaluator<Tarea>.GetQuery(_context.Tareas.AsQueryable(), especificacion).ToList();
         }
 
-        public Tarea Get(long id)
+        public Tarea Get(ISpecification<Tarea> especificacion)
         {
-            var Tarea = _context.Tareas
-                .FirstOrDefault(t =>
-                    t.Estado == EstadoGeneralEnumeration.Activo.Id &&
-                    t.Id == id);
-            return Tarea;
+            return SpecificationEvaluator<Tarea>.GetQuery(_context.Tareas.AsQueryable(), especificacion).FirstOrDefault();
         }
 
         public void Add(Tarea Tarea)

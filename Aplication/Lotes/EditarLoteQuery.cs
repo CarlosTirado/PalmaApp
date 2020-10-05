@@ -1,4 +1,5 @@
 ﻿using Domain.Base;
+using Domain.Cultivos;
 using Domain.Lotes;
 using MediatR;
 using System;
@@ -21,7 +22,7 @@ namespace Aplication.Lotes
 
         public Task<EditarLoteResponse> Handle(EditarLoteRequest request, CancellationToken cancellationToken)
         {
-            var cultivo = _palmAppUnitOfWork.CultivoRepository.Get(request.CultivoId);
+            var cultivo = _palmAppUnitOfWork.CultivoRepository.Get(new ConsultaCultivoPorIdSpecification(request.CultivoId));
             if(cultivo == null)
             {
                 return Task.FromResult(new EditarLoteResponse("No se ha podido encontrar el Cultivo que contenga ese Lote"));

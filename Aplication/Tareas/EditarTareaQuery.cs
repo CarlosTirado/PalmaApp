@@ -21,7 +21,7 @@ namespace Aplication.Tareas
 
         public Task<EditarTareaResponse> Handle(EditarTareaRequest request, CancellationToken cancellationToken)
         {
-            var tarea = _palmAppUnitOfWork.TareaRepository.Get(request.TareaId);
+            var tarea = _palmAppUnitOfWork.TareaRepository.Get(new ConsultaTareaPorIdSpecification(request.TareaId));
 
             tarea.Editar(request.Nombre, request.Descripcion, request.Estado);
             _palmAppUnitOfWork.Commit();

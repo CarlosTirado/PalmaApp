@@ -1,5 +1,6 @@
 ﻿using Aplication.Tareas.ModelView;
 using Domain.Base;
+using Domain.Tareas;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Aplication.Tareas
 
         public Task<ConsultarTareaPorIdResponse> Handle(ConsultarTareaPorIdRequest request, CancellationToken cancellationToken)
         {
-            var tarea = _palmAppUnitOfWork.TareaRepository.Get(request.TareaId);
+            var tarea = _palmAppUnitOfWork.TareaRepository.Get(new ConsultaTareaPorIdSpecification(request.TareaId));
             var tareaView = new TareaModelView()
             {
                 Id = tarea.Id,

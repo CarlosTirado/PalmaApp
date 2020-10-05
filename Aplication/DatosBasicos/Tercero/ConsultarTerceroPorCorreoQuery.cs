@@ -1,4 +1,5 @@
 ﻿using Domain.Base;
+using Domain.Terceros;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace Aplication.DatosBasicos.Tercero
 
         public Task<ConsultarTerceroPorCorreoQueryResponse> Handle(ConsultarTerceroPorCorreoQueryRequest request, CancellationToken cancellationToken)
         {
-            var tercero = _palmAppUnitOfWork.TerceroRepository.GetPorCorreo(request.Correo);
+            var tercero = _palmAppUnitOfWork.TerceroRepository.Get(new ConsultaTerceroPorEmailSpecification(request.Correo));
             var terceroView = new TerceroModelView()
             {
                 Apellidos = tercero.Apellidos,

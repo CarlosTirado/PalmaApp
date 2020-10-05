@@ -21,10 +21,12 @@ namespace Aplication.Cultivos
 
         public Task<EditarCultivoResponse> Handle(EditarCultivoRequest request, CancellationToken cancellationToken)
         {
-            var cultivo = _palmAppUnitOfWork.CultivoRepository.Get(request.CultivoId);
+            var cultivo = _palmAppUnitOfWork.CultivoRepository.Get(new ConsultaCultivoPorIdSpecification(request.CultivoId));
 
             cultivo.Editar(request.Nombre, request.FechaSiembra, request.Estado);
+
             _palmAppUnitOfWork.Commit();
+
             return Task.FromResult(new EditarCultivoResponse(cultivo.Id));
         }
     }

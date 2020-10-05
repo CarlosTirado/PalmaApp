@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Palmas;
 
 namespace Aplication.Palmas
 {
@@ -21,7 +22,7 @@ namespace Aplication.Palmas
 
         public Task<ConsultarPalmaPorIdResponse> Handle(ConsultarPalmaPorIdRequest request, CancellationToken cancellationToken)
         {
-            var palma = _palmAppUnitOfWork.PalmaRepository.Get(request.PalmaId);
+            var palma = _palmAppUnitOfWork.PalmaRepository.Get(new ConsultaPalmaPorIdSpecification(request.PalmaId));
             var palmaView = new PalmaModelView()
             {
                 Id = palma.Id,

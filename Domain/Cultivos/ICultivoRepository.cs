@@ -1,4 +1,5 @@
-﻿using Domain.Cultivos;
+﻿using Domain.Base;
+using Domain.Cultivos;
 using Domain.Lotes;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,8 @@ namespace Domain.Cultivos
     public interface ICultivoRepository
     {
         ICollection<Cultivo> Gets();
-        Cultivo Get(long id);
+        ICollection<Cultivo> Gets(ISpecification<Cultivo> especificacion);
+        Cultivo Get(ISpecification<Cultivo> especificacion);
         void Add(Cultivo cultivo);
-        Lote GetLotePorId(long loteId);
-        ICollection<Lote> GetLotes(long cultivoId);
     }
 }

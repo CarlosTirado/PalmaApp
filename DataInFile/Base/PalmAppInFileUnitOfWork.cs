@@ -1,10 +1,12 @@
 ﻿using DataInfile.Cultivos;
 using DataInFile.DatosBasicos.Terceros;
+using DataInFile.Lotes;
 using DataInFile.Palmas;
 using DataInFile.Tareas;
 using Domain.Base;
 using Domain.Cultivos;
 using Domain.DatosBasicos;
+using Domain.Lotes;
 using Domain.Palmas;
 using Domain.Tareas;
 using System;
@@ -32,6 +34,9 @@ namespace DataInFile.Base
 
         private ICultivoRepository _cultivoRepository;
         public ICultivoRepository CultivoRepository { get { return _cultivoRepository ?? (_cultivoRepository = new CultivoInFileRepository(_fileData)); } }
+
+        private ILoteRepository _loteRepository;
+        public ILoteRepository LoteRepository { get { return _loteRepository ?? (_loteRepository = new LoteInFileRepository(_fileData)); } }
 
         private ITareaRepository _tareaRepository;
         public ITareaRepository TareaRepository { get { return _tareaRepository ?? (_tareaRepository = new TareaInFileRepository(_fileData)); } }

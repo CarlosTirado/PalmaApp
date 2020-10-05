@@ -53,6 +53,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="DataInFile\PalmAppData.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

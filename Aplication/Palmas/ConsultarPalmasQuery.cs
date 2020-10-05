@@ -1,5 +1,6 @@
 ﻿using Aplication.Palmas.ModelView;
 using Domain.Base;
+using Domain.Palmas;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace Aplication.Palmas
 
         public Task<ConsultarPalmasResponse> Handle(ConsultarPalmasRequest request, CancellationToken cancellationToken)
         {
-            var palmas = _palmAppUnitOfWork.PalmaRepository.Gets(request.LoteId);
+            var palmas = _palmAppUnitOfWork.PalmaRepository.Gets(new ConsultaPalmasPorLoteIdSpecification(request.LoteId));
             var palmasView = palmas.Select(palma  => new PalmaModelView()
             {
                 Id = palma.Id,

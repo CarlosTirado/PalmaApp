@@ -1,4 +1,6 @@
-﻿using Data.Context;
+﻿using Data.Base;
+using Data.Context;
+using Domain.Base;
 using Domain.DatosBasicos;
 using Domain.DatosBasicos.EstadosGenerales;
 using System;
@@ -19,24 +21,17 @@ namespace Data.DatosBasicos.Terceros
 
         public ICollection<Tercero> Gets()
         {
-            var terceros = _context.Terceros.Where(t => t.Estado == EstadoGeneralEnumeration.Activo.Id).ToList();
-            return terceros;
+            return _context.Terceros.ToList();
         }
 
-        public Tercero Get(string identificacion)
+        public ICollection<Tercero> Gets(ISpecification<Tercero> especificacion)
         {
-            var tercero = _context.Terceros.FirstOrDefault(t => 
-                t.Estado == EstadoGeneralEnumeration.Activo.Id &&
-                t.Identificacion == identificacion);
-            return tercero;
+            return SpecificationEvaluator<Tercero>.GetQuery(_context.Terceros.AsQueryable(), especificacion).ToList();
         }
 
-        public Tercero GetPorCorreo(string correo)
+        public Tercero Get(ISpecification<Tercero> especificacion)
         {
-            var tercero = _context.Terceros.FirstOrDefault(t =>
-                t.Estado == EstadoGeneralEnumeration.Activo.Id &&
-                t.Email == correo);
-            return tercero;
+            return SpecificationEvaluator<Tercero>.GetQuery(_context.Terceros.AsQueryable(), especificacion).FirstOrDefault();
         }
     }
 }

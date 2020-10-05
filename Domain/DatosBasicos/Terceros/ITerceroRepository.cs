@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,7 +8,7 @@ namespace Domain.DatosBasicos
     public interface ITerceroRepository
     {
         ICollection<Tercero> Gets();
-        Tercero Get(string identificacion);
-        Tercero GetPorCorreo(string correo);
+        ICollection<Tercero> Gets(ISpecification<Tercero> especificacion);
+        Tercero Get(ISpecification<Tercero> especificacion);
     }
 }

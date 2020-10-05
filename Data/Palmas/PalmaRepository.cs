@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Domain.Base;
+using Data.Base;
 
 namespace Data.Palmas
 {
@@ -20,22 +22,14 @@ namespace Data.Palmas
             _context = context;
         }
 
-        public ICollection<Palma> Gets(long loteId)
+        public ICollection<Palma> Gets(ISpecification<Palma> especificacion)
         {
-            var Palmas = _context.Palmas.Where(t => 
-                t.Estado == EstadoGeneralEnumeration.Activo.Id &&
-                t.LoteId == loteId
-                ).ToList();
-            return Palmas;
+            return SpecificationEvaluator<Palma>.GetQuery(_context.Palmas.AsQueryable(), especificacion).ToList();
         }
 
-        public Palma Get(long id)
+        public Palma Get(ISpecification<Palma> especificacion)
         {
-            var Palma = _context.Palmas
-                .FirstOrDefault(t =>
-                    t.Estado == EstadoGeneralEnumeration.Activo.Id &&
-                    t.Id == id);
-            return Palma;
+            return SpecificationEvaluator<Palma>.GetQuery(_context.Palmas.AsQueryable(), especificacion).FirstOrDefault();
         }
 
         public void Add(Palma Palma)

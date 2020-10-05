@@ -1,5 +1,7 @@
 ﻿using Aplication.Lotes.ModelView;
 using Domain.Base;
+using Domain.Cultivos;
+using Domain.Lotes;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -21,7 +23,8 @@ namespace Aplication.Lotes
 
         public Task<ConsultarLotesResponse> Handle(ConsultarLotesRequest request, CancellationToken cancellationToken)
         {
-            var lotes = _palmAppUnitOfWork.CultivoRepository.GetLotes(request.CultivoId);
+            var lotes = _palmAppUnitOfWork.LoteRepository.Gets(new ConsultaLotesPorCultivoIdSpecification(request.CultivoId));
+
             var lotesView = lotes.Select(t => new LoteModelView()
             {
                 Id = t.Id,

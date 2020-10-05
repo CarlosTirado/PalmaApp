@@ -1,6 +1,7 @@
 ﻿using Aplication.Cultivos.ModelView;
 using Aplication.Lotes.ModelView;
 using Domain.Base;
+using Domain.Cultivos;
 using Domain.Lotes;
 using MediatR;
 using System.Collections.Generic;
@@ -21,12 +22,12 @@ namespace Aplication.Cultivos
 
         public Task<ConsultarCultivoPorIdResponse> Handle(ConsultarCultivoPorIdRequest request, CancellationToken cancellationToken)
         {
-            var cultivo = _palmAppUnitOfWork.CultivoRepository.Get(request.CultivoId);
+            var cultivo = _palmAppUnitOfWork.CultivoRepository.Get(new ConsultaCultivoPorIdSpecification(request.CultivoId));
             var cultivoView = new CultivoModelView()
             {
                 Id = cultivo.Id,
                 Estado = cultivo.Estado,
-                FechaSiembra = cultivo.FechaSiembra,
+                FechaSiembra = cultivo.FechaSiembra, 
                 Nombre = cultivo.Nombre,
                 Lotes = cultivo.Lotes.Select(t=> new LoteModelView()
                 {

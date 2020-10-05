@@ -1,5 +1,6 @@
 ﻿using Aplication.Lotes.ModelView;
 using Domain.Base;
+using Domain.Lotes;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace Aplication.Lotes
 
         public Task<ConsultarLotePorIdResponse> Handle(ConsultarLotePorIdRequest request, CancellationToken cancellationToken)
         {
-            var lote = _palmAppUnitOfWork.CultivoRepository.GetLotePorId(request.LoteId);
+            var lote = _palmAppUnitOfWork.LoteRepository.Get(new ConsultaLotePorIdSpecification(request.LoteId));
             var loteView = new LoteModelView()
             {
                 Id = lote.Id,

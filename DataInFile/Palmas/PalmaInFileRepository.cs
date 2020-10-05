@@ -1,4 +1,5 @@
-﻿using Domain.Palmas;
+﻿using Domain.Base;
+using Domain.Palmas;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,8 +14,7 @@ namespace DataInFile.Palmas
         {
             _fileData = fileData;
         }
-
-        public ICollection<Palma> Gets(long loteId)
+        public ICollection<Palma> Gets(ISpecification<Palma> especificacion)
         {
             /// Logica de consultar una lista de Palmas en archivo plano
             /// ...
@@ -37,8 +37,7 @@ namespace DataInFile.Palmas
                 palma1, palma2, palma3
             };
         }
-
-        public Palma Get(long id)
+        public Palma Get(ISpecification<Palma> especificacion)
         {
             /// Logica de consultar una Palma en archivo plano
             /// ...
@@ -48,7 +47,6 @@ namespace DataInFile.Palmas
 
             return new Palma(altura: 4, descripcion: "Palma_Fake 1", new DateTime(2020, 01, 01));
         }
-
         public void Add(Palma Palma)
         {
             //Logica de guardar Palma en archivo plano

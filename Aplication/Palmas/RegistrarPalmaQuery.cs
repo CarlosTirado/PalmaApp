@@ -1,4 +1,6 @@
 ﻿using Domain.Base;
+using Domain.Cultivos;
+using Domain.Lotes;
 using Domain.Palmas;
 using MediatR;
 using System;
@@ -21,13 +23,13 @@ namespace Aplication.Palmas
 
         public Task<RegistrarPalmaResponse> Handle(RegistrarPalmaRequest request, CancellationToken cancellationToken)
         {
-            var cultivo = _palmAppUnitOfWork.CultivoRepository.Get(request.CultivoId);
+            var cultivo = _palmAppUnitOfWork.CultivoRepository.Get(new ConsultaCultivoPorIdSpecification(request.CultivoId));
             if (cultivo == null)
             {
                 return Task.FromResult(new RegistrarPalmaResponse("No se ha podido encontrar el Cultivo que contenga ese Lote"));
             }
 
-            var lote = cultivo.Lotes.FirstOrDefault(t=> t.Id == request.LoteId);
+            var lote = _palmAppUnitOfWork.LoteRepository.Get(new ConsultaLotePorIdSpecification(request.LoteId));
             if (lote == null)
             {
                 return Task.FromResult(new RegistrarPalmaResponse("No se ha podido encontrar el Lote al que intenta agregarle la Palma"));

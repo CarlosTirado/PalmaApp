@@ -1,4 +1,5 @@
-﻿using Domain.Cultivos;
+﻿using Domain.Base;
+using Domain.Cultivos;
 using Domain.Lotes;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,14 @@ namespace DataInfile.Cultivos
             _fileData = fileData;
         }
 
-        public ICollection<Cultivo> Gets()
+
+        public void Add(Cultivo cultivo)
+        {
+            // Logica de guardar un cultivo en archivo plano
+        }
+
+
+        public ICollection<Cultivo> Gets(ISpecification<Cultivo> especificacion)
         {
             /// Logica de consultar una lista de Cultivo en archivo plano
             /// ...
@@ -31,7 +39,7 @@ namespace DataInfile.Cultivos
             };
         }
 
-        public Cultivo Get(long id)
+        public Cultivo Get(ISpecification<Cultivo> especificacion)
         {
             /// Logica de consultar un Cultivo en archivo plano
             /// ...
@@ -39,38 +47,22 @@ namespace DataInfile.Cultivos
             /// ...
             /// 
 
-            return new Cultivo("Cultivo_Fake 1",DateTime.Now);
+            return new Cultivo("Cultivo_Fake 1", DateTime.Now);
         }
 
-        public void Add(Cultivo cultivo)
+        public ICollection<Cultivo> Gets()
         {
-            // Logica de guardar un cultivo en archivo plano
-        }
-
-        public Lote GetLotePorId(long loteId)
-        {
-            /// Logica de consultar un Lote de un cultivo por Id en archivo plano
+            /// Logica de consultar una lista de Cultivo en archivo plano
             /// ...
             /// ...
             /// ...
             /// 
 
-            return new Lote(cultivoId: 1, nombre: "Lote_Fake", numeroHectareas: 5);
-        }
-
-        public ICollection<Lote> GetLotes(long cultivoId)
-        {
-            /// Logica de consultar una Lotes de Cultivo en archivo plano
-            /// ...
-            /// ...
-            /// ...
-            /// 
-
-            return new List<Lote>()
+            return new List<Cultivo>()
             {
-                new Lote(cultivoId: 1, nombre: "Lote_Fake 1", numeroHectareas: 5),
-                new Lote(cultivoId: 1, nombre: "Lote_Fake 2", numeroHectareas: 5),
-                new Lote(cultivoId: 1, nombre: "Lote_Fake 3", numeroHectareas: 5)
+                new Cultivo("Cultivo_Fake 1",DateTime.Now),
+                new Cultivo("Cultivo_Fake 2",DateTime.Now),
+                new Cultivo("Cultivo_Fake 3",DateTime.Now)
             };
         }
     }

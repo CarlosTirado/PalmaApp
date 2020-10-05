@@ -21,7 +21,7 @@ namespace Aplication.Palmas
 
         public Task<EditarPalmaResponse> Handle(EditarPalmaRequest request, CancellationToken cancellationToken)
         {
-            var Palma = _palmAppUnitOfWork.PalmaRepository.Get(request.PalmaId);
+            var Palma = _palmAppUnitOfWork.PalmaRepository.Get(new ConsultaPalmaPorIdSpecification(request.PalmaId));
 
             Palma.Editar(request.Altura, request.Descripcion, request.FechaSiembra, request.Estado);
 
