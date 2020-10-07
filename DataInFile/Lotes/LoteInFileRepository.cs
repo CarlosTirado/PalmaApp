@@ -25,8 +25,25 @@ namespace DataInFile.Lotes
 
             return new Lote(cultivoId: 1, nombre: "Lote_Fake 1", numeroHectareas: 3);
         }
+        
 
         public ICollection<Lote> Gets(ISpecification<Lote> especificacion)
+        {
+            /// Logica de consultar una lista de Lote en archivo plano
+            /// ...
+            /// ...
+            /// ...
+            /// 
+
+            return new List<Lote>()
+            {
+                new Lote(1, "Lote_Fake 1", 5),
+                new Lote(1, "Lote_Fake 2", 5),
+                new Lote(1, "Lote_Fake 3", 5)
+            };
+        }
+
+        public ICollection<Lote> Gets()
         {
             /// Logica de consultar una lista de Lote en archivo plano
             /// ...

@@ -9,6 +9,7 @@ namespace Domain.Lotes
 {
     public interface ILoteRepository
     {
+        ICollection<Lote> Gets();
         ICollection<Lote> Gets(ISpecification<Lote> especificacion);
         Lote Get(ISpecification<Lote> especificacion);
     }

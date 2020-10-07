@@ -23,6 +23,11 @@ namespace Data.Lotes
             return SpecificationEvaluator<Lote>.GetQuery(_context.Lotes.AsQueryable(), especificacion).ToList();
         }
 
+        public ICollection<Lote> Gets()
+        {
+            return _context.Lotes.ToList();
+        }
+
         public Lote Get(ISpecification<Lote> especificacion) 
         {
             return SpecificationEvaluator<Lote>.GetQuery(_context.Lotes.AsQueryable(), especificacion).FirstOrDefault();
