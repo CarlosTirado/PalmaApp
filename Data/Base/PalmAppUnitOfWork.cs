@@ -16,10 +16,15 @@ namespace Data.Base
 {
     public class PalmAppUnitOfWork : IPalmAppUnitOfWork
     {
+        private readonly PalmAppContext _context;
+        private readonly IRepositoryAbstractFactory _repositoryAbstractFactory;
 
-        public PalmAppUnitOfWork(PalmAppContext context)
+        public PalmAppUnitOfWork(
+            PalmAppContext context, 
+            IRepositoryAbstractFactory repositoryAbstractFactory)
         {
             _context = context;
+            _repositoryAbstractFactory = repositoryAbstractFactory;
         }
 
         public void Commit()
@@ -27,21 +32,10 @@ namespace Data.Base
             _context.SaveChanges();
         }
 
-        protected PalmAppContext _context;
-
-        private ITerceroRepository _terceroRepository;
-        public ITerceroRepository TerceroRepository { get { return _terceroRepository ?? (_terceroRepository = new TerceroRepository(_context)); } }
-
-        private ICultivoRepository _cultivoRepository;
-        public ICultivoRepository CultivoRepository { get { return _cultivoRepository ?? (_cultivoRepository = new CultivoRepository(_context)); } }
-
-        private ILoteRepository _loteRepository;
-        public ILoteRepository LoteRepository { get { return _loteRepository ?? (_loteRepository = new LoteRepository(_context)); } }
-
-        private ITareaRepository _tareaRepository;
-        public ITareaRepository TareaRepository { get { return _tareaRepository ?? (_tareaRepository = new TareaRepository(_context)); } }
-
-        private IPalmaRepository _palmaRepository;
-        public IPalmaRepository PalmaRepository { get { return _palmaRepository ?? (_palmaRepository = new PalmaRepository(_context)); } }
+        public ITerceroRepository TerceroRepository => _repositoryAbstractFactory.CreateTerceroRepository();
+        public ICultivoRepository CultivoRepository => _repositoryAbstractFactory.CreateCultivoRepository();
+        public ILoteRepository LoteRepository => _repositoryAbstractFactory.CreateLoteRepository();
+        public ITareaRepository TareaRepository => _repositoryAbstractFactory.CreateTareaRepository();
+        public IPalmaRepository PalmaRepository => _repositoryAbstractFactory.CreatePalmaRepository();
     }
 }

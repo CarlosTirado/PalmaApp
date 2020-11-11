@@ -14,7 +14,7 @@ namespace Domain.Palmas
         public decimal Altura { get; private set; }
         public string Descripcion { get; private set; }
         public DateTime FechaSiembra { get; private set; }
-        public string Estado { get; set; }
+        public string Estado { get; private set; }
         public long LoteId { get; private set; }
         public virtual Lote Lote { get; private set; }
 
