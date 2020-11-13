@@ -1,13 +1,11 @@
-﻿using Domain.DatosBasicos.EstadosGenerales;
+﻿using Domain.Base;
+using Domain.DatosBasicos.EstadosGenerales;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Domain.DatosBasicos
 {
-    public class Tercero
+    public class Tercero : ICloneable<Tercero>
     {
-
         public long Id { get; private set; }
         public string Identificacion { get; private set; }
         public string Nombres { get; private set; }
@@ -37,5 +35,9 @@ namespace Domain.DatosBasicos
             Estado = EstadoGeneralEnumeration.Activo.Id;
         }
 
+        public Tercero Clonar()
+        {
+            return this.MemberwiseClone() as Tercero;
+        }
     }
 }

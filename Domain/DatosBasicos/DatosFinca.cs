@@ -6,12 +6,12 @@
         
         private static DatosFinca _datosFinca { get; set; }
         
-        public string FincaLogo { get; set; }
-        public string FincaNombre { get; set; }
-        public string PropietarioIdentificacion { get; set; }
-        public string PropietarioNombre { get; set; }
-        public string Direccion { get; set; }
-        public string Telefono { get; set; }
+        public string FincaLogo { get; private set; }
+        public string FincaNombre { get; private set; }
+        public string PropietarioIdentificacion { get; private set; }
+        public string PropietarioNombre { get; private set; }
+        public string Direccion { get; private set; }
+        public string Telefono { get; private set; }
 
         public static DatosFinca GetDatosFinca()
         {

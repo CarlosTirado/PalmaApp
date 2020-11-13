@@ -1,4 +1,5 @@
 ﻿using Domain.Base;
+using Domain.DatosBasicos;
 using Domain.Terceros;
 using MediatR;
 using System;
