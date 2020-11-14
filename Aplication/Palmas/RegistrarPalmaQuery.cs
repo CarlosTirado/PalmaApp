@@ -35,7 +35,9 @@ namespace Aplication.Palmas
                 return Task.FromResult(new RegistrarPalmaResponse("No se ha podido encontrar el Lote al que intenta agregarle la Palma"));
             }
 
-            var palma = new Palma(request.Altura, request.Descripcion, request.FechaSiembra);
+            //var palma = new Palma(request.Altura, request.Descripcion, request.FechaSiembra);
+            PalmaBuilder builder = new PalmaBuilder();
+            Palma palma = builder.Altura(request.Altura).Descripcion(request.Descripcion).FechaSiembra(request.FechaSiembra).Build();
 
             lote.AgregarPalma(palma);
 

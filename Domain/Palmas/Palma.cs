@@ -9,14 +9,16 @@ namespace Domain.Palmas
 {
     public class Palma
     {
-        public long Id { get; private set; }
-        public string Consecutivo { get; private set; }
-        public decimal Altura { get; private set; }
-        public string Descripcion { get; private set; }
-        public DateTime FechaSiembra { get; private set; }
-        public string Estado { get; private set; }
-        public long LoteId { get; private set; }
-        public virtual Lote Lote { get; private set; }
+        public long Id { get; set; }
+        public string Consecutivo { get;  set; }
+        public decimal Altura { get;  set; }
+        public string Descripcion { get;  set; }
+        public DateTime FechaSiembra { get;  set; }
+        public string Estado { get;  set; }
+        public long LoteId { get;  set; }
+        public virtual Lote Lote { get;  set; }
+
+        public Palma() { }
 
         public Palma(
             decimal altura,
