@@ -5,52 +5,54 @@ using System.Text;
 
 namespace Domain.Palmas
 {
-    public class PalmaBuilder : IBuilderPalma
+    public partial class Palma
     {
-        public PalmaBuilder() { }
+        public class PalmaBuilder : IBuilderPalma
+        {        
+            private string consecutivo;
+            private decimal altura;
+            private string descripcion;
+            private DateTime fechaSiembra;
+            private string estado;
 
-        
-        private string _Consecutivo;
-        private decimal _Altura;
-        private string _Descripcion;
-        private DateTime _FechaSiembra;
-        private string _Estado;
+            public PalmaBuilder() { }
+            
+            public PalmaBuilder Altura(decimal altura)
+            {
+                this.altura = altura;
+                return this;
+            }
+            public PalmaBuilder Consecutivo(string consecutivo)
+            {
+                this.consecutivo = consecutivo;
+                return this;
+            }
+            public PalmaBuilder Descripcion(string descripcion)
+            {
+                this.descripcion = descripcion;
+                return this;
+            }
+            public PalmaBuilder FechaSiembra(DateTime fechaSiembra)
+            {
+                this.fechaSiembra = fechaSiembra;
+                return this;
+            }
+            public PalmaBuilder Estado(string estado)
+            {
+                this.estado = estado;
+                return this;
+            }
 
-        public PalmaBuilder Altura(decimal altura)
-        {
-            _Altura = altura;
-            return this;
-        }
-        public PalmaBuilder Consecutivo(string consecutivo)
-        {
-            this._Consecutivo = consecutivo;
-            return this;
-        }
-        public PalmaBuilder Descripcion(string descripcion)
-        {
-            this._Descripcion = descripcion;
-            return this;
-        }
-        public PalmaBuilder FechaSiembra(DateTime fechaSiembra)
-        {
-            _FechaSiembra = fechaSiembra;
-            return this;
-        }
-        public PalmaBuilder Estado(string estado)
-        {
-            _Estado = estado;
-            return this;
-        }
-
-        public Palma Build()
-        {
-            Palma palma = new Palma();
-            palma.Altura = _Altura;
-            palma.Consecutivo = _Consecutivo;
-            palma.Descripcion = _Descripcion;
-            palma.FechaSiembra = _FechaSiembra;
-            palma.Estado = _Estado;
-            return palma;
+            public Palma Build()
+            {
+                Palma palma = new Palma();
+                palma.Altura = altura;
+                palma.Consecutivo = consecutivo;
+                palma.Descripcion = descripcion;
+                palma.FechaSiembra = fechaSiembra;
+                palma.Estado = estado;
+                return palma;
+            }
         }
     }
 }

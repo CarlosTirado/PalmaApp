@@ -86,7 +86,7 @@ namespace TestCore5
 
             services.AddScoped<IPalmAppUnitOfWork, PalmAppUnitOfWork>();
             
-            services.AddScoped<IRepositoryAbstractFactory, RepositoryInFileAbstractFactory>();
+            services.AddScoped<IRepositoryAbstractFactory, RepositoryAbstractFactory>();
         }
 
 
