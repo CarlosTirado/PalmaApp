@@ -9,14 +9,22 @@ namespace Domain.Palmas
 {
     public class Palma
     {
-        public long Id { get; set; }
-        public string Consecutivo { get;  set; }
-        public decimal Altura { get;  set; }
-        public string Descripcion { get;  set; }
-        public DateTime FechaSiembra { get;  set; }
-        public string Estado { get;  set; }
-        public long LoteId { get;  set; }
+        private long _Id;
+        private string _Consecutivo;
+        private decimal _Altura;
+        private string _Descripcion;
+        private DateTime _FechaSiembra;
+        private string _Estado;
+        private long _LoteId;
         public virtual Lote Lote { get;  set; }
+
+        public long Id { get => _Id; set => _Id = value; }
+        public string Consecutivo { get => _Consecutivo; set => _Consecutivo = value; }
+        public decimal Altura { get => _Altura; set => _Altura = value; }
+        public string Descripcion { get => _Descripcion; set => _Descripcion = value; }
+        public DateTime FechaSiembra { get => _FechaSiembra; set => _FechaSiembra = value; }
+        public string Estado { get => _Estado; set => _Estado = value; }
+        public long LoteId { get => _LoteId; set => _LoteId = value; }
 
         public Palma() { }
 
@@ -25,10 +33,10 @@ namespace Domain.Palmas
             string descripcion,
             DateTime fechaSiembra)
         {
-            Altura = altura;
-            Descripcion = descripcion;
-            FechaSiembra = fechaSiembra;
-            Estado = EstadoGeneralEnumeration.Activo.Id;
+            _Altura = altura;
+            _Descripcion = descripcion;
+            _FechaSiembra = fechaSiembra;
+            _Estado = EstadoGeneralEnumeration.Activo.Id;
         }
 
         public void Editar(
@@ -37,16 +45,16 @@ namespace Domain.Palmas
             DateTime fechaSiembra,
             string estado)
         {
-            Altura = altura;
-            Descripcion = descripcion;
-            FechaSiembra = fechaSiembra;
-            Estado = estado;
+            _Altura = altura;
+            _Descripcion = descripcion;
+            _FechaSiembra = fechaSiembra;
+            _Estado = estado;
         }
 
         public void AsignarConsecutivo(
            string consecutivo)
         {
-            Consecutivo = consecutivo;
+            _Consecutivo = consecutivo;
         }
     }
 }

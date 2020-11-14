@@ -1,6 +1,5 @@
 ﻿using Domain.Base;
 using Domain.Lotes;
-using Domain.Lotes;
 using System;
 using System.Collections.Generic;
 using System.Text;

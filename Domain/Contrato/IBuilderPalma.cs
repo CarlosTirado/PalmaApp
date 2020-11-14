@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Domain.Contrato
 {
-    public interface IBuilder
+    public interface IBuilderPalma
     {
         Palma Build();
     }

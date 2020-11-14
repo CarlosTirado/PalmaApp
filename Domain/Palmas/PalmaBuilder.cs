@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Domain.Palmas
 {
-    public class PalmaBuilder : IBuilder
+    public class PalmaBuilder : IBuilderPalma
     {
         public PalmaBuilder() { }
 
-        private long Id;
+        
         private string _Consecutivo;
         private decimal _Altura;
         private string _Descripcion;
