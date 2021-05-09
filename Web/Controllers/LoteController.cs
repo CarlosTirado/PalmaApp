@@ -5,10 +5,12 @@ using Aplication.Cultivos.ModelView;
 using Aplication.Lotes;
 using Aplication.Lotes.ModelView;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class LoteController : Controller

@@ -124,10 +124,15 @@ namespace Data.Migrations
                     b.Property<DateTime>("FechaSiembra")
                         .HasColumnType("datetime2");
 
+                    b.Property<long>("Lote2Id")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("LoteId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Lote2Id");
 
                     b.HasIndex("LoteId");
 
@@ -166,6 +171,12 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.Palmas.Palma", b =>
                 {
+                    b.HasOne("Domain.Lotes.Lote", "Lote2")
+                        .WithMany("Palmas2")
+                        .HasForeignKey("Lote2Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Domain.Lotes.Lote", "Lote")
                         .WithMany("Palmas")
                         .HasForeignKey("LoteId")

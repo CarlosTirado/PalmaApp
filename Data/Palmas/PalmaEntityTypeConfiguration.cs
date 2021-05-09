@@ -18,6 +18,7 @@ namespace Data.Palmas.Mappers
             builder.HasKey(t => t.Id);
 
             builder.HasOne(t => t.Lote).WithMany(x => x.Palmas).HasForeignKey(x => x.LoteId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(t => t.Lote2).WithMany(x => x.Palmas2).HasForeignKey(x => x.Lote2Id).OnDelete(DeleteBehavior.Restrict);
         }
     }
 } 

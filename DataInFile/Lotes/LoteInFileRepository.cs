@@ -25,7 +25,11 @@ namespace DataInFile.Lotes
 
             return new Lote(cultivoId: 1, nombre: "Lote_Fake 1", numeroHectareas: 3);
         }
-        
+
+        public Lote Get(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         public ICollection<Lote> Gets(ISpecification<Lote> especificacion)
         {

@@ -2,6 +2,7 @@
 using Data.Context;
 using Domain.Base;
 using Domain.Lotes;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace Data.Lotes
             _context = context;
         }
 
+
+
         public ICollection<Lote> Gets(ISpecification<Lote> especificacion)
         {
             return SpecificationEvaluator<Lote>.GetQuery(_context.Lotes.AsQueryable(), especificacion).ToList();
@@ -31,6 +34,15 @@ namespace Data.Lotes
         public Lote Get(ISpecification<Lote> especificacion) 
         {
             return SpecificationEvaluator<Lote>.GetQuery(_context.Lotes.AsQueryable(), especificacion).FirstOrDefault();
+        }
+
+        public Lote Get(int id)
+        {
+            var lote = _context.Lotes
+                .Include(t => t.Palmas)
+                .FirstOrDefault(t => t.Id == id);
+
+            return lote;
         }
     }
 }

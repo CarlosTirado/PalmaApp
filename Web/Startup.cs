@@ -17,6 +17,7 @@ using MediatR;
 using Data.Base;
 using Domain.Base;
 using System;
+using Amazon.S3;
 using Web.Controllers;
 using DataInFile.Base;
 
@@ -34,6 +35,7 @@ namespace TestCore5
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAWSService<IAmazonS3>();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("PalmAppContext")));
