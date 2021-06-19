@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Mandamiento de Pago</title>
+    <style>
+        .LeyendaPiePaginaIzquierda {
+            font-size: 8px;
+            float: left;
+        }
+
+        .LeyendaPiePaginaDerecha {
+            font-size: 8px;
+            float: left;
+        }
+
+        @media all {
+            div.saltopagina {
+                display: none;
+            }
+        }
+
+        @media print {
+            div.saltopagina {
+                display: block;
+                page-break-before: always;
+            }
+        }
+
+        .fontSize {
+            font-size: 20px;
+        }
+
+        .Titulo {
+            font-weight: bold;
+            font-family: Arial;
+            text-align: center;
+        }
+
+        .Content {
+            font-family: Arial;
+            width: 100%;
+            height: 100%;
+            padding-top: 40px;
+        }
+
+        label {
+            overflow: hidden;
+        }
+
+        .Parrafo {
+            text-align: justify;
+            line-height: 16pt;
+            word-spacing: 0.1em;
+            font-size: 13pt;
+        }
+
+        .firma {
+            text-align: center;
+            width: 100%;
+            height: 150px;
+        }
+
+        .firma>img {
+            vertical-align: middle;
+            width: 150px;
+            height: 150px;
+        }
+
+        /*********************CSS Encabezado****************************/
+        .Header1 {
+            height: 100px;
+            width: 100%;
+        }
+
+        #headerLogo,
+        #headerTitulo,
+        #headerCodigo,
+        #headerQR {
+            float: left;
+            height: 100px;
+        }
+
+        #headerLogo,
+        #headerVigencia,
+        #headerConcepto,
+        #headerTipoDocumento,
+        #headerNit,
+        #headerDV,
+        #headerDireccion,
+        #headerCorreo {
+            border-right: 1px solid black;
+        }
+
+        #headerLogo,
+        #headerVigencia {
+            width: 20%;
+            text-align: center;
+        }
+
+        #headerTitulo,
+        #headerConcepto {
+            width: 58%;
+        }
+
+        #headerFecha {
+            width: 20%;
+        }
+
+        #headerCodigo {
+            border-left: 1px solid black;
+            width: 20%;
+            margin-left: 8px;
+            text-align: center;
+        }
+
+        #headerQR {
+            width: 9%;
+            margin-left: -2px;
+        }
+
+        #headerQR>img {
+            margin-top: 2px;
+            height: 95px;
+        }
+
+        #headerLogo>img {
+            height: 94px;
+            margin-top: 3px;
+        }
+
+        #headerCodigo>div {
+            background-color: #0D47A1 !important;
+            text-align: center;
+            height: 94px;
+            margin-top: 3px;
+            margin-left: 8px;
+            -webkit-print-color-adjust: exact;
+        }
+
+        #headerCodigo>img {
+            text-align: center;
+            height: 94px;
+            margin-top: 3px;
+        }
+
+        #CodigoDocumento {
+            color: white !important;
+            position: relative;
+            font-size: 40px;
+            font-weight: bold;
+            height: 100%;
+            width: 100%;
+            top: 25%;
+        }
+
+        .disminuirEspacio01 {
+            margin-top: -16px;
+        }
+
+        .Header2,
+        .Header3 {
+            border-top: 1px solid black;
+            width: 100%;
+        }
+
+        .footer {
+            border-top: none;
+            border-bottom: 1px solid black;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+        }
+
+        .Header2,
+        #headerFecha,
+        #headerConcepto,
+        #headerVigencia {
+            height: 26px;
+        }
+
+        .Header3,
+        #headerTipoDocumento,
+        #headerNit,
+        #headerDV,
+        #headerNombreContribuyente,
+        #headerDireccion,
+        #headerCiudad,
+        #headerCorreo,
+        #headerTelefono {
+            height: 39px;
+        }
+
+        #headerFecha,
+        #headerConcepto,
+        #headerVigencia,
+        #headerTipoDocumento,
+        #headerNit,
+        #headerDV,
+        #headerNombreContribuyente,
+        #headerDireccion,
+        #headerCiudad,
+        #headerCorreo,
+        #headerTelefono {
+            float: left;
+        }
+
+        #headerVigencia>h5,
+        #headerConcepto>h5,
+        #headerFecha>h5 {
+            margin-top: 3px;
+            font-size: 14px;
+        }
+
+        .subtitulo {
+            border-top: 1px solid black;
+            height: 19px;
+            width: 100%;
+            font-size: 14px;
+            padding-top: 2px;
+        }
+
+        #headerTipoDocumento,
+        #headerNit,
+        #headerDV,
+        #headerNombreContribuyente,
+        #headerDireccion,
+        #headerCiudad,
+        #headerCorreo,
+        #headerTelefono {
+            padding: 0 0 0 4px;
+            box-sizing: border-box;
+        }
+
+        #headerTipoDocumento {
+            width: 17%;
+        }
+
+        #headerNit {
+            width: 31%;
+        }
+
+        #headerDV {
+            width: 5%;
+        }
+
+        #headerNombreContribuyente {
+            width: 43%;
+        }
+
+        #headerDireccion {
+            width: 45%;
+            /*border-left: 1px solid black;*/
+        }
+
+        #headerDireccionFilaCompleta {
+            width: 100%;
+            /*border-left: 1px solid black;*/
+        }
+
+        #headerNumeroPredio {
+            padding-left: 10px;
+        }
+
+        #headerCiudad {
+            width: 35%;
+        }
+
+        #headerCorreo {
+            width: 65%;
+        }
+
+        #headerTelefono {
+            width: 35%;
+        }
+
+        .labelContribuyente {
+            font-family: Arial;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        .labelContribuyente2 {
+            font-family: Arial;
+            font-size: 15px;
+            text-transform: uppercase;
+        }
+
+        .font-2 {
+            font-family: "Arial";
+        }
+
+        .notaPie,
+        .notaPie2 {
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .notaPie2 {
+            font-size: 18px;
+            color: #9E9E9E;
+        }
+
+        .sangria {
+            margin-top: -18px;
+        }
+
+        thead {
+            display: table-row-group;
+        }
+
+        .Encabezado {
+            border-collapse: collapse;
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+        }
+
+        #tableCarteraMandamiento,
+        #tableCarteraMandamientoValorImpuesto {
+            width: 80%;
+            padding-left: 10%;
+            text-align: left;
+        }
+
+        .right {
+            text-align: right !important;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #tableCarteraMandamiento>thead th:nth-child(6),
+        th:nth-child(7) {
+            display: none;
+        }
+
+        #tableCarteraMandamiento>tbody>tr td:nth-child(6),
+        td:nth-child(7) {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="min-width: 1020px; box-sizing: border-box;text-align:justify;">
+        <!-- ********************************************** Aqui comienza la Pagina(1)***********************************************-->
+        <div class="Content">
+            <div id="Encabezado" class="Encabezado">
+                <div class="Header1">
+                    <!-- ************************Primer bloque del encabezado**********************-->
+                    <div id="headerLogo"> {imgAlcaldia} </div>
+                    <div id="headerTitulo">
+                        <h3 class="Titulo disminuirEspacio00">ALCALDÍA DE <label id="txtMunicipio"
+                                style="text-transform: uppercase;">{Municipio}</label></h3>
+                        <h4 class="Titulo disminuirEspacio01">SECRETARÍA DE HACIENDA MUNICIPAL</h4>
+                        <h4 class="Titulo disminuirEspacio01">TESORERIA MUNICIPAL</h4>
+                    </div>
+                    <div id="headerCodigo"> {imgMunicipio} </div>
+                </div>
+                <div class="Header2">
+                    <div id="headerConcepto">
+                        <h5 class="Titulo font-2">MANDAMIENTO DE PAGO No. <label
+                                id="NumeroEmplazamiento">{NumeroDocumento}</label></h5>
+                    </div>
+                    <div id="headerFecha" class="text-left">
+                        <h5 class="Titulo">PROCESO N°: <label id="NumeroExpediente">{NumeroExpediente}</label></h5>
+                    </div>
+                    <div id="headerFecha">
+                        <h5 class="Titulo font-2">FECHA: <label id="FechaEmplazamiento">{FechaDocumento}</label></h5>
+                    </div>
+                </div>
+                <!-- ************************Tercer bloque del encabezado: Datos del Contribuyente**********************-->
+                <div class="subtitulo Titulo">DATOS DEL CONTRIBUYENTE</div>
+                <div class="Header3" style="height:20px;">
+                    <div id="headerTipoDocumento" style="height:20px;"> <label class="labelContribuyente"><strong>TIPO
+                                DOCUMENTO</strong></label><br /> </div>
+                    <div id="headerNit" style="height:20px;"> <label class="labelContribuyente"><strong>NÚMERO DE
+                                IDENTIFICACIÓN</strong></label><br /> </div>
+                    <div id="headerNombreContribuyente" style="height:20px;"> <label
+                            class="labelContribuyente"><strong>APELLIDOS Y NOMBRE O RAZÓN SOCIAL</strong></label><br />
+                    </div>
+                </div> {Contribuyentes} <div class="Header3" style="height:20px;">
+                    <div id="headerDireccion" style="height:20px;"> <label class="labelContribuyente"><strong>NO.
+                                PREDIO: </strong></label> <label class="labelContribuyente2"
+                            id="DireccionContribuyente">{NumeroPredio}</label> </div>
+                    <div id="headerNumeroPredio" style="height:20px;"> <label class="labelContribuyente"
+                            style="padding-left: 5px;"><strong>CUANTÍA : </strong></label> <label
+                            class="labelContribuyente2" id="NumeroPredio">{CuantiaExpediente}</label> </div>
+                </div>
+                <div class="Header3" style="height:20px;">
+                    <div id="headerDireccionFilaCompleta" style="height:20px;"> <label class="labelContribuyente"
+                            style="padding-left: 5px;"><strong>DIRECCIÓN: </strong></label> <label
+                            class="labelContribuyente2" id="headerDireccionFilaCompleta">{DireccionPredio}</label>
+                    </div>
+                </div>
+            </div>
+            <div style="border-collapse:collapse; border:1px solid black; padding-left:20px; padding-right:20px;">
+                <p class="Parrafo">La Secretaria de Hacienda Municipal en uso de sus atribuciones Constitucionales,
+                    legales y reglamentarias, en especial las establecidas en el artículo 826 del Estatuto Tributario ,
+                    el artículo 59 de la ley 788 de 2002, la ley 1066 de 2010, reglamentada mediante el decreto 4473 de
+                    2006 y el acuerdo Municipal 012 del 24 de diciembre de 2020.</p>
+                <h4 class="Titulo fontSize">CONSIDERANDO:</h4>
+                <p class="Parrafo">Obra al despacho para su cobro por jurisdicción coactiva la liquidación oficial del
+                    impuesto predial Unificado, por valor de: {ValorCapital} en la cual consta una obligación clara,
+                    expresa y actualmente exigible, a favor del Municipio de {Municipio} y en contra de
+                    {NombresPropietarios}, por concepto de impuesto Predial Unificado del predio identificado con numero
+                    catastral: {NumeroPredio}, tal como se detalla en el siguiente cuadro </p>
+                <table id="tableCarteraMandamiento">
+                    <thead>
+                        <tr>
+                            <th>Liquidación Oficial</th>
+                            <th>Vigencia</th>
+                            <th>Periodo</th>
+                            <th>Concepto</th>
+                            <th class="right">Capital</th>
+                            <th class="right">Interes</th>
+                            <th class="right">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody> {DetalleCarteraConcepto} </tbody>
+                </table>
+                <div style="width:100%;text-align:center">
+                    <p class="text-center"><strong>* El valor de los intereses se causaran hasta la fecha del pago
+                            efectivo.</strong></p>
+                </div>
+                <p class="Parrafo">Liquidación oficial que presta mérito ejecutivo de conformidad con el artículo 828
+                    del Estatuto Tributario, y articulo 537 del Acuerdo Municipal Nº 012 de 2012, sumas que no han sido
+                    pagadas por el contribuyente, por lo cual cabe iniciar el procedimiento de cobro administrativo
+                    coactivo contenido en los artículos 823 y siguientes del Estatuto Tributario para obtener su pago.
+                </p>
+                <p> Que reposa en el expediente certificación de deuda como lo establece el artículo 828 del Estatuto
+                    Tributario Nacional. </p>
+                <h4 class="Titulo fontSize">RESUELVE:</h4>
+                <p class="Parrafo"> <strong>PRIMERO:</strong> Librar mandamiento de pago a favor del Municipio de
+                    {Municipio} y a cargo de {NombresPropietarios}, por la suma de {ValorCapital} pesos, por concepto de
+                    Impuesto Predial Unificado y sobretasas a cargo del predio identificado con referencia catastral No.
+                    {NumeroPredio}, vigencias {VigenciasCarteras}, conforme a la siguiente tabla: </p>
+                <table id="tableCarteraMandamientoValorImpuesto">
+                    <thead>
+                        <tr>
+                            <th>Liquidación Oficial</th>
+                            <th>Vigencia</th>
+                            <th>Periodo</th>
+                            <th>Concepto</th>
+                            <th class="right">Valor impuesto</th>
+                        </tr>
+                    </thead>
+                    <tbody> {DetalleCarteraConceptoSoloImpuesto} </tbody>
+                </table>
+                <p class="Parrafo">Más los intereses de mora que se causen desde cuando se hizo exigible cada
+                    obligación, liquidados bajo la tasa vigente certificada por la Superintendencia Financiera y hasta
+                    cuando se cancelen las obligaciones, conforme a lo dispuesto en los Artículos 634, 635 y 867-1 del
+                    Estatuto Tributario, más las costas del presente proceso. </p>
+                <p class="Parrafo"> <strong>SEGUNDO:</strong>Notificar este mandamiento de pago personalmente al
+                    ejecutado, su apoderado o representante legal, previa citación por correo certificado dirigida a
+                    {NombresPropietarios} para que comparezca dentro de los diez (10) días siguientes al recibo de la
+                    misma. De no comparecer en el término fijado, notificar por correo conforme lo dispuesto en el
+                    artículo 826, concordante con el Artículo 565 del Estatuto Tributario. </p>
+                <p class="Parrafo"> <strong>TERCERO:</strong> Advertir al deudor que dispone de quince (15) días después
+                    de notificada esta providencia, para cancelar la deuda o proponer las excepciones legales que estime
+                    pertinentes, conforme al Artículo 830 del Estatuto Tributario y artículo 537 del Acuerdo Municipal
+                    012 de 2012. </p>
+                <p class="Parrafo"> <strong>CUARTO:</strong> Líbrense los oficios correspondientes. </p> <br />
+                <h4 class="Titulo fontSize">NOTIFÍQUESE Y CÚMPLASE</h4> <br />
+                <div style="width:100%;text-align:center;"> {FirmaResponsable} </div>
+                <p class="notaPie sangria"><strong id="NombreResponsable">{NombreResponsable}</strong></p>
+                <p class="notaPie sangria" id="Cargo">Secretaria de hacienda del municipio de {Municipio}</p>
+                <p class="notaPie sangria" id="Cargo">{LeyendaFirma}</p>
+            </div>
+            <div class="Header2 footer">
+                <div id="headerConcepto" style="width:33% !important">
+                    <h5 class="Titulo font-2">MANDAMIENTO DE PAGO No. <label
+                            id="NumeroEmplazamiento">{NumeroDocumento}</label></h5>
+                </div>
+                <div id="headerFecha" class="text-left" style="border-right:1px solid black;width:33% !important;">
+                    <h5 class="Titulo">PROCESO N°: <label id="NumeroExpediente">{NumeroExpediente}</label></h5>
+                </div>
+                <div id="headerFecha" style="width:33% !important;">
+                    <h5 class="Titulo font-2">FECHA: <label id="FechaEmplazamiento">{FechaDocumento}</label></h5>
+                </div>
+            </div>
+        </div>
+        <p class="Parrafo LeyendaPiePaginaIzquierda">Proyectó: {UsuarioProyecto}</p>
+    </div>
+</body>
+
+</html>
