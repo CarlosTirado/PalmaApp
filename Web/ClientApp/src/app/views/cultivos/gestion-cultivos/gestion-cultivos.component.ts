@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cultivo } from '../Models/cultivo';
 import { CultivoService } from '../Services/Cultivo.service';
@@ -16,37 +16,34 @@ export class GestionCultivosComponent implements OnInit {
 	public cultivoForm:FormGroup;
 	public visualizarFormulario: boolean = false;
 	public GuardarCultivo = this.RegistrarCultivo;
-
 	public accion:string;
 	private cultivoId:number;
-	private cultivoEstado:string;
+  private cultivoEstado: string;
+  @ViewChild('bodyGestionCultivos', { static: false }) public bodyGestionCultivos: ElementRef;
 
 	constructor(
 		private _formBuilder: FormBuilder,
 		private _router:Router,
 		private _cultivoService: CultivoService
 	) { }
-
-	ngOnInit() {
+	public ngOnInit() {
 		this.cultivos = new Array<Cultivo>();
 		this.ConsultarCultivos();
 		this.cultivoForm = this.InicializarFormulario();
-	}
-
+  }
 	public IrAGestionLotes(cultivo:Cultivo){
 		this._router.navigate([`/cultivos/${cultivo.id}/Lotes`]);
 	}	
-
 	private ConsultarCultivos(){
 		this._cultivoService.ConsultarCultivos()
 		.subscribe(response =>{
 			if(!response) return;
 			this.cultivos = response;
 			this.cultivoForm.reset();
-			this.visualizarFormulario = false;
+      this.visualizarFormulario = false;
+      this.DibujarTabla();
 		})
 	}
-
 	public AbrirModalNuevoCultivo(){
 		this.visualizarFormulario = true;
 		this.cultivoForm.reset();
@@ -68,7 +65,6 @@ export class GestionCultivosComponent implements OnInit {
 		const fechaString:string = fecha.toString().split('T')[0];
 		return fechaString;
 	}
-
 	private RegistrarCultivo(){
 		this.ConfirmMessage('question','','',(result)=>{
 			const cultivoForm = this.cultivoForm.value;
@@ -80,7 +76,6 @@ export class GestionCultivosComponent implements OnInit {
 			})			
 		});
 	}
-
 	private EditarCultivo(){
 		this.ConfirmMessage('question','','',(result)=>{
 			const cultivoForm = this.cultivoForm.value;
@@ -92,7 +87,6 @@ export class GestionCultivosComponent implements OnInit {
 			})
 		})
 	}
-
 	public EliminarCultivo(cultivo:Cultivo){
 		this.ConfirmMessage('warning','','',(result)=>{
 			this._cultivoService.InactivarCultivo(cultivo.id, cultivo.nombre, cultivo.fechaSiembra)
@@ -103,14 +97,12 @@ export class GestionCultivosComponent implements OnInit {
 			})
 		})
 	}
-
 	private InicializarFormulario():FormGroup{
 		return this._formBuilder.group({
 			nombre: [undefined, [Validators.required]],
 			fechaSiembra: [undefined, [Validators.required]],
 		})
 	}
-
 	private ShowMessage(type:'success'|'error'|'warning'|'info',message:string, title:string=null){
 		Swal.fire({
 			title: title,
@@ -120,7 +112,6 @@ export class GestionCultivosComponent implements OnInit {
 			timer: 2500
 		  });
 	}
-
 	private ConfirmMessage(type:'warning'|'question', message:string, title:string=null, successEvent){
 		Swal.fire({
 			icon: type,
@@ -135,6 +126,22 @@ export class GestionCultivosComponent implements OnInit {
 				successEvent(result.value);	
 			}
 		  })
-	}
+  }
+  private DibujarTabla() {
+    var filasTabla = "";
+    this.cultivos.forEach((cultivo,index) => {
+      filasTabla =
+        "<tr>" +
+          "<td class='text-center'>" + index + 1 + "</td>" +
+          "<td>" + cultivo.nombre + "</td>" +
+          "<td class='text-center'>" + cultivo.fechaSiembra + "</td>" +
+          "<td class='text-center'>" + cultivo.estado + "</td>" +
+          "<td class='text-center'>Lotes - Editar - Eliminar</td>" +
+        "</tr>";
 
+    });
+
+    this.bodyGestionCultivos.nativeElement.insertAdjacentHTML('beforeend', filasTabla);
+
+  }
 }
