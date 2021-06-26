@@ -21,6 +21,7 @@ steps:
     projectName: 'Palmapp_Palmapp'
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+- script: dotnet test
 - task: SonarQubeAnalyze@4
 - task: SonarQubePublish@4
   inputs:
