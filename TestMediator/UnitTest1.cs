@@ -34,5 +34,14 @@ namespace TestMediator
             // Provocar un cambio en un uno de los elementos
             cc3.comunicar("ColegaConcreto3 ha cambiado!");
         }
+
+        [Test]
+        public void Test2()
+        {
+            var a = 3;
+            var b = 4;
+            var c = a + b;
+            Assert.AreEqual(7, c);
+        }
     }
 }
