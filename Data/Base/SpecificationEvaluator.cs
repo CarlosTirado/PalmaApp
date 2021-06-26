@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Data.Base
 {
-    public class SpecificationEvaluator<T>
+    public static class SpecificationEvaluator<T>
     {
         public static IQueryable<T> GetQuery(IQueryable<T> inputQuery, ISpecification<T> specification)
         {

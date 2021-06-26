@@ -6,8 +6,8 @@ namespace Data.Services
 {
     public abstract class InformeConsolidadoService
     {
-        public PalmAppContext _context;
-        public InformeConsolidadoService(PalmAppContext context)
+        protected readonly PalmAppContext _context;
+        protected InformeConsolidadoService(PalmAppContext context)
         {
             _context = context;
         }
