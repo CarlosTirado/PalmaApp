@@ -1,4 +1,6 @@
 using System;
+using System.Security.Cryptography;
+using NETCore.Encrypt;
 using NUnit.Framework;
 
 namespace TestMediator
@@ -42,6 +44,24 @@ namespace TestMediator
             var b = 4;
             var c = a + b;
             Assert.AreEqual(7, c);
+        }
+
+
+        [Test]
+        public void TestRSA()
+        {
+            var rsaKey = EncryptProvider.CreateRsaKey();
+
+            var publicKey = rsaKey.PublicKey;
+            var privateKey = rsaKey.PrivateKey;
+
+            var plaintext = "CARLOS ORLEY TIRADO PABON";
+
+            var encrypted = EncryptProvider.RSAEncrypt(publicKey, plaintext, RSAEncryptionPadding.Pkcs1);
+
+            var decrypted = EncryptProvider.RSADecrypt(privateKey, encrypted, RSAEncryptionPadding.Pkcs1);
+
+            Assert.AreEqual(plaintext, decrypted);
         }
     }
 }
