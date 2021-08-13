@@ -1,0 +1,40 @@
+.loading-container{
+    width: 100%;
+    min-height: 100vh;
+    color: #fafafa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+div.loading-container img {
+  max-width: 160px;
+}
+
+div.loading-container .progress-bar {
+  margin-top: 12px;
+  position: relative;
+  height: 8px;
+  width: 160px;
+  border-radius: 4px;
+  background: #fafafa;
+  overflow: hidden;
+}
+
+  div.loading-container .progress-bar::after {
+    content: '';
+    position: absolute;
+    background: linear-gradient(45deg, #1ab394, #94d7f8);
+    width: 80px;
+    height: 10px;
+    left: -20px;
+    border-radius: 2px;
+    animation: progressAnimation 1.8s linear infinite;
+  }
+
+@keyframes progressAnimation {
+  50% {
+    left: 100px;
+  }
+}

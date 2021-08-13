@@ -1,0 +1,93 @@
+<div class="panel">
+    <div class="panel-heading h5 text-right">
+        <span class="pull-left"><i class="fa fa-tree m-r-xs"></i> Cultivos</span>
+        <button class="btn btn-primary" (click)='AbrirModalNuevoCultivo()'>Nuevo Cultivo <i class="fa fa-plus m-l-xs"></i></button>
+    </div>
+    <div class="panel-body">
+      <div class="panel panel-default" *ngIf='visualizarFormulario'>
+        <div class="panel-heading text-right">
+          <span class="pull-left">{{accion}} Cultivo</span>
+          <i class="fa fa-times" (click)='visualizarFormulario = false' style="cursor:pointer"></i>
+        </div>
+        <div class="panel-body">
+          <form [formGroup]='cultivoForm'>
+            <div class="row p-w-md">
+              <div class="col-sm-12 col-md-5">
+                <label>Nombre</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-address-card"></i>
+                  </div>
+                  <input type="text" class="form-control" formControlName='nombre'>
+                </div>
+                <small class="text-danger" *ngIf='cultivoForm.get("nombre").hasError("required") && (cultivoForm.get("nombre").dirty || cultivoForm.get("nombre").touched)'>
+                  El nombre del cultivo es obligatorio
+                </small>
+              </div>
+              <div class="col-sm-12 col-md-5">
+                <label>Fecha Siembra</label>
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar-o"></i>
+                  </div>
+                  <input type="date" class="form-control" formControlName='fechaSiembra'>
+                </div>
+                <small class="text-danger" *ngIf='cultivoForm.get("fechaSiembra").hasError("required") && (cultivoForm.get("fechaSiembra").dirty || cultivoForm.get("fechaSiembra").touched)'>
+                  La fecha de siembra es obligatoria
+                </small>
+              </div>
+              <div class="col-sm-12 col-md-2">
+                <button class="btn btn-primary m-t-md" (click)='GuardarCultivo()' [disabled]='cultivoForm.invalid'> Guardar <i class="m-l-xs fa fa-save"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="table-responsive p-w-sm">
+        <table class="table table-bordered table-striped m-b-xs">
+          <thead>
+            <tr>
+              <th class="text-center">#</th>
+              <th class="text-center">Nombre</th>
+              <th class="text-center">Fecha Siembra</th>
+              <th class="text-center">Estado</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let cultivo of cultivos; index as i'>
+              <td class="text-center">{{i+1}}</td>
+              <td>{{cultivo.nombre}}</td>
+              <td class="text-center">{{cultivo.fechaSiembra | date:'dd-MM-yyyy'}}</td>
+              <td class="text-center"> <span class="label" [ngClass]='{"label-primary": cultivo.estado == "AC", "label-danger": cultivo.estado != "AC"}'>{{cultivo.estado == 'AC' ? 'ACTIVO': 'INACTIVO'}}</span></td>
+              <td style="width: 165px;" class="text-center">
+                <button class="btn btn-default btn-xs" (click)='IrAGestionLotes(cultivo)'>Lotes</button>
+                <button class="btn btn-default btn-xs" (click)='AbrirModalEditarCultivo(cultivo)'>Editar</button>
+                <button class="btn btn-default btn-xs" (click)='EliminarCultivo(cultivo)'>Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5" class="text-center" *ngIf='cultivos.length <= 0'><i>No se encontraron cultivos registrados en el sistema</i></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <br /><br />
+      <div class="table-responsive p-w-sm">
+        <table class="table table-bordered table-striped m-b-xs">
+          <thead>
+            <tr>
+              <th class="text-center">#</th>
+              <th class="text-center">Nombre</th>
+              <th class="text-center">Fecha Siembra</th>
+              <th class="text-center">Estado</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody #bodyGestionCultivos>
+        </table>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="panel">
+  <div class="panel-heading h5 text-right">
+    <span class="pull-left"><i class="fa fa-address-book"></i> Usuarios</span>
+    <button class="btn btn-primary">Nuevo<i class="fa fa-plus m-l-xs"></i></button>
+  </div>
+  <div class="panel-body">
+    <div class="panel panel-default" >
+      <div class="panel-heading text-right">
+        <span class="pull-left">Registro Usuarios</span>
+        <i class="fa fa-times" style="cursor:pointer"></i>
+      </div>
+      <!--<div class="panel-body">
+        <form [formGroup]='UsuarioForm'>
+          <div class="row p-w-md">
+            <div class="col-sm-12 col-md-5">
+              <label>Nombre</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-address-card"></i>
+                </div>
+                <input type="text" class="form-control" formControlName='nombre'>
+              </div>
+              <small class="text-danger" *ngIf='UsuarioForm.get("nombre").hasError("required") && (UsuarioForm.get("nombre").dirty || UsuarioForm.get("nombre").touched)'>
+                El nombre del usuario es obligatorio
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-5">
+              <label>Nombre</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-address-card"></i>
+                </div>
+                <input type="text" class="form-control" formControlName='apellido'>
+              </div>
+              <small class="text-danger" *ngIf='UsuarioForm.get("apellido").hasError("required") && (UsuarioForm.get("apellido").dirty || UsuarioForm.get("apellido").touched)'>
+                El nombre del usuario es obligatorio
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-5">
+              <label>Fecha Siembra</label>
+              <div class="input-group date">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar-o"></i>
+                </div>
+                <input type="date" class="form-control" formControlName='fechaNacimiento'>
+              </div>
+              <small class="text-danger" *ngIf='UsuarioForm.get("fechaNacimiento").hasError("required") && (UsuarioForm.get("fechaNacimiento").dirty || UsuarioForm.get("fechaNacimiento").touched)'>
+                La fecha de nacimiento es obligatoria
+              </small>
+            </div>
+            <div class="col-sm-12 col-md-2">
+              <button class="btn btn-primary m-t-md" (click)='GuardarUsuario()' [disabled]='UsuarioForm.invalid'> Guardar <i class="m-l-xs fa fa-save"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>-->
+       
+    </div>
+    <div class="table-responsive p-w-sm">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Identificación</th>
+            <th class="text-center">Nombre Completo</th>
+            <th class="text-center">Fecha Nacimiento</th>
+            <th class="text-center">Teléfono</th>
+            <th class="text-center">Dirección</th>
+            <th class="text-center">Correo Electrónico</th>
+            <th class="text-center">Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let User of Usuario; index as i'>
+            <td class="text-center">{{i+1}}</td>
+            <td>{{User.identificacion}}</td>
+            <td>{{User.nombres}} {{User.apellidos}}</td>
+            <td class="text-center">{{User.fechaNacimiento | date:'dd-MM-yyyy'}}</td>
+            <td>{{User.telefono}}</td>
+            <td>{{User.direccion}}</td>
+            <td>{{User.email}}</td>
+            <td class="text-center"> <span class="label" [ngClass]='{"label-primary": User.estado == "AC", "label-danger": User.estado != "AC"}'>{{User.estado == 'AC' ? 'ACTIVO': 'INACTIVO'}}</span></td>
+            <td style="width: 125px;">
+              <button class="btn btn-default btn-xs" >Editar</button>
+              <button class="btn btn-default btn-xs" >Inactivar</button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="9" class="text-center" *ngIf='Usuario.length <= 0'><i>No se encontraron usuarios registrados en el sistema</i></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+

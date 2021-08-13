@@ -1,0 +1,100 @@
+<div class="panel">
+    <button class="m-t-xs m-l-xs btn btn-xs btn-circle m-r-sm" (click)='irAtras()'><i class="fa fa-arrow-left"></i></button>
+    <div class="panel-heading h4">
+        <i class="fa fa-tree m-r-xs"></i> Cultivo - {{cultivo?.nombre}} 
+        <i class="fa fa-angle-right m-l-xs m-r-xs"></i> Lote - {{lote?.nombre}}
+    </div>
+    <div class="p-w-sm">
+        <div class="panel-heading h5 text-right m-b-n">
+            <span class="pull-left"><i class="fa fa-pagelines m-r-xs"></i> Palmas</span>
+            <button class="btn btn-primary" (click)='AbrirModalNuevaPalma()'>Nueva Palma <i class="fa fa-plus m-l-xs"></i></button>
+        </div>
+        <div class="panel-body">
+            <div class="panel panel-default" *ngIf='visualizarFormulario'>
+                <div class="panel-heading text-right">
+                    <span class="pull-left">{{accion}} Palma</span>
+                    <i class="fa fa-times" (click)='visualizarFormulario = false' style="cursor:pointer"></i>
+                </div>
+                <div class="panel-body">
+                    <form [formGroup]='palmaForm'>
+                        <div class="row p-w-md">
+                            <div class="col-md-4">
+                                <div class="col-sm-12">
+                                    <label>Altura <abbr title="Metros">mts</abbr></label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-sliders"></i>
+                                        </div>
+                                        <input type="number" class="form-control" formControlName='altura'>
+                                    </div>
+                                    <small class="text-danger" *ngIf='palmaForm.get("altura").hasError("required") && (palmaForm.get("altura").dirty || palmaForm.get("altura").touched)'>
+                                        La altura de la palma es obligatoria
+                                    </small>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <label>Fecha Siembra</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar-o"></i>
+                                        </div>
+                                        <input type="date" class="form-control" formControlName='fechaSiembra'>
+                                    </div>
+                                    <small class="text-danger" *ngIf='palmaForm.get("fechaSiembra").hasError("required") && (palmaForm.get("fechaSiembra").dirty || palmaForm.get("fechaSiembra").touched)'>
+                                        La fecha de siembra es obligatoria
+                                    </small>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-12 col-md-5">
+                                <label>Descipción</label>
+                                <textarea class="form-control" rows="4" formControlName='descripcion'></textarea>
+                                <small class="text-danger" *ngIf='palmaForm.get("descripcion").hasError("required") && (palmaForm.get("descripcion").dirty || palmaForm.get("descripcion").touched)'>
+                                    La descripción de la palma es obligatoria
+                                </small>
+                            </div>
+
+                            <div class="col-sm-12 col-md-2">
+                                <button class="btn btn-primary m-t-md" (click)='GuardarPalma()' [disabled]='palmaForm.invalid'> Guardar <i class="m-l-xs fa fa-save"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="table-responsive p-w-sm">
+                <table class="table table-bordered table-striped m-b-xs">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <!-- <th class="text-center">Codigo</th> -->
+                            <th class="text-center">Descripción</th>
+                            <th class="text-center">Altura (mts)</th>
+                            <th class="text-center">Fecha Siembra</th>
+                            <th class="text-center">Estado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let palma of palmas; index as i'>
+                            <!-- <td class="text-center">{{i+1}}</td> -->
+                            <td class="text-center">{{(palma.consecutivo)}}</td>
+                            <td>{{palma.descripcion}}</td>
+                            <td>{{palma.altura}} mts</td>
+                            <td>{{palma.fechaSiembra | date:'dd MMM yyyy'}}</td>
+                            <td class="text-center"> <span class="label" [ngClass]='{"label-primary": palma.estado == "AC", "label-danger": palma.estado != "AC"}'>{{palma.estado == 'AC' ? 'ACTIVO': 'INACTIVO'}}</span></td>
+                            <td style="width: 125px;" class="text-center">
+                                <button class="btn btn-default btn-xs" (click)='AbrirModalEditarPalma(palma)'>Editar</button>
+                                <button class="btn btn-default btn-xs" (click)='EliminarPalma(palma)'>Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="7" class="text-center" *ngIf='palmas.length <= 0'><i>No se encontraron palmas registrados en el sistema para el lote solicitado</i></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
