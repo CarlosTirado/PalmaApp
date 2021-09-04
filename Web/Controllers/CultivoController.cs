@@ -3,12 +3,14 @@ using System.Threading.Tasks;
 using Aplication.Cultivos;
 using Aplication.Cultivos.ModelView;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CultivoController : Controller
     {
         private readonly IMediator _mediator;

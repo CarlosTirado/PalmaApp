@@ -1,4 +1,5 @@
-﻿using Data.Cultivos.Mappers;
+﻿using Data.Alertas.Mappers;
+using Data.Cultivos.Mappers;
 using Data.DatosBasicos.Mappers;
 using Data.Lotes.Mappers;
 using Data.Palmas.Mappers;
@@ -39,6 +40,8 @@ namespace Data.Context
             modelBuilder.ApplyConfiguration(new LoteEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new PalmaEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new TareaEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new AlertaEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new AlertaSeguimientoEntityTypeConfiguration());
         }
     }
 }
