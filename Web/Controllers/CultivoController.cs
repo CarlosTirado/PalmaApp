@@ -10,7 +10,6 @@ namespace Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class CultivoController : Controller
     {
         private readonly IMediator _mediator;

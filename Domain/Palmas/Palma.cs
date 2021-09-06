@@ -18,9 +18,6 @@ namespace Domain.Palmas
         public long LoteId { get; private set; }
         public virtual Lote Lote { get; private set; }
 
-        public long Lote2Id { get; private set; }
-        public virtual Lote Lote2 { get; private set; }
-
         public Palma() { }
 
         public Palma(
