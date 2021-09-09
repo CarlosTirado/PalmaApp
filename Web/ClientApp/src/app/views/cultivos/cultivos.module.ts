@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GestionLotesComponent } from './gestion-lotes/gestion-lotes.component';
 import { GestionPalmasComponent } from './gestion-palmas/gestion-palmas.component';
 import { GestionTareasComponent } from './gestion-tareas/gestion-tareas.component';
+import { AlertasComponent } from './alertas/alertas.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { GestionTareasComponent } from './gestion-tareas/gestion-tareas.componen
     RegistroCultivoComponent,
     GestionLotesComponent,
     GestionPalmasComponent,
-    GestionTareasComponent
+    GestionTareasComponent,
+    AlertasComponent
   ],
   imports: [
     CommonModule,

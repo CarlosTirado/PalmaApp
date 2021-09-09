@@ -11,6 +11,7 @@ import { GestionUsuariosComponent } from "./usuarios/gestion-usuarios/gestion-us
 import { GestionLotesComponent } from "./views/cultivos/gestion-lotes/gestion-lotes.component";
 import { GestionPalmasComponent } from "./views/cultivos/gestion-palmas/gestion-palmas.component";
 import { GestionTareasComponent } from "./views/cultivos/gestion-tareas/gestion-tareas.component";
+import { AlertasComponent } from "./views/cultivos/alertas/alertas.component";
 
 export const ROUTES: Routes = [
   // Main redirect
@@ -38,6 +39,12 @@ export const ROUTES: Routes = [
     children: [
       { path: 'programar', component: GestionTareasComponent, canActivate: [AuthorizeGuard] },
       { path: 'crear', component: GestionTareasComponent, canActivate: [AuthorizeGuard] },
+    ]
+  },
+  {
+    path: 'alertas', component: BasicLayoutComponent,
+    children: [
+      { path: 'gestion', component: AlertasComponent, canActivate: [AuthorizeGuard] },
     ]
   },
   {
