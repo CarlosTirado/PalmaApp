@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Aplication.DatosBasicos.Tercero;
@@ -37,6 +38,28 @@ namespace Web.Controllers
         {
             var response = _mediator.Send(new ConsultarTerceroPorCorreoQueryRequest(correo));
             return Ok(response.Result.Tercero);
+        }
+
+
+        [HttpGet("PruebaEscribir")]
+        public string PruebaEscribir()
+        {
+            try
+            {
+                StreamWriter sw = new StreamWriter("C:\\Test.txt", true);
+                sw.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")}: Hello World!!");
+                sw.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Finalizado");
+            }
+
+            return "Correcto!!"; 
         }
     }
 }

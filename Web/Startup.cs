@@ -87,9 +87,9 @@ namespace TestCore5
         {
             services.AddMediatR(AppDomain.CurrentDomain.Load("Aplication"));
 
-            services.AddScoped<IPalmAppUnitOfWork, PalmAppUnitOfWork>();
+            services.AddScoped<IPalmAppUnitOfWork, PalmAppInFileUnitOfWork>();
             
-            services.AddScoped<IRepositoryAbstractFactory, RepositoryAbstractFactory>();
+            services.AddScoped<IRepositoryAbstractFactory, RepositoryInFileAbstractFactory>();
         }
 
 
